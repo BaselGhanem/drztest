@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="ar" dir="rtl" data-bs-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
@@ -30,8 +30,22 @@
 
             --shadow-sm: 0 4px 6px rgba(0, 0, 0, 0.04);
             --shadow-md: 0 10px 20px rgba(0, 0, 0, 0.08);
+            --glass-bg: rgba(255, 255, 255, 0.85);
+            --glass-border: rgba(255, 255, 255, 0.2);
             --border-radius: 16px;
             --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        /* Premium Dark Mode Override */
+        [data-bs-theme="dark"] {
+            --bg-color: #121418;
+            --card-bg: #1e2126;
+            --text-dark: #f8f9fa;
+            --text-light: #adb5bd;
+            --glass-bg: rgba(30, 33, 38, 0.85);
+            --glass-border: rgba(255, 255, 255, 0.05);
+            --shadow-sm: 0 4px 15px rgba(0, 0, 0, 0.3);
+            --shadow-md: 0 10px 25px rgba(0, 0, 0, 0.5);
         }
 
         body {
@@ -39,16 +53,19 @@
             background-color: var(--bg-color);
             color: var(--text-dark);
             overflow-x: hidden;
+            transition: background-color 0.4s ease, color 0.4s ease;
         }
 
-        /* Navbar */
+        /* Glassmorphism Navbar */
         .navbar {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
+            background: var(--glass-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
             box-shadow: var(--shadow-sm);
             padding: 1rem 0;
             margin-bottom: 2rem;
-            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            border-bottom: 1px solid var(--glass-border);
+            transition: all 0.4s ease;
         }
 
         .navbar-brand {
@@ -79,10 +96,10 @@
             box-shadow: 0 6px 15px rgba(9, 153, 153, 0.35);
         }
 
-        /* UI Elements */
+        /* UI Elements & Glass Cards */
         .card {
             border-radius: var(--border-radius);
-            border: 1px solid rgba(0, 0, 0, 0.03);
+            border: 1px solid var(--glass-border);
             box-shadow: var(--shadow-sm);
             transition: var(--transition);
             background: var(--card-bg);
@@ -92,20 +109,30 @@
             box-shadow: var(--shadow-md);
         }
 
+        /* Premium Inputs with Glow Focus */
         .form-control,
         .form-select {
             border-radius: 12px;
-            border: 1px solid #dfe6e9;
+            border: 1px solid var(--glass-border);
             padding: 0.8rem 1rem;
             transition: var(--transition);
-            background-color: #fcfcfc;
+            background-color: rgba(128, 128, 128, 0.03);
+            color: var(--text-dark);
+        }
+        
+        [data-bs-theme="dark"] .form-control,
+        [data-bs-theme="dark"] .form-select {
+            background-color: rgba(255, 255, 255, 0.03);
+            border-color: rgba(255, 255, 255, 0.1);
+            color: var(--text-dark);
         }
 
         .form-control:focus,
         .form-select:focus {
             border-color: var(--primary);
-            background-color: #fff;
-            box-shadow: 0 0 0 4px rgba(9, 153, 153, 0.15);
+            background-color: transparent;
+            box-shadow: 0 0 15px rgba(9, 153, 153, 0.15);
+            outline: none;
         }
 
         .btn-main {
@@ -125,7 +152,20 @@
             color: white;
         }
 
-        /* Kanban Board */
+        /* One-Click Copy Buttons */
+        .copy-btn {
+            cursor: pointer;
+            color: var(--text-light);
+            transition: var(--transition);
+            background: rgba(128,128,128,0.1);
+            border-radius: 4px;
+            padding: 2px 6px;
+            margin-right: 5px;
+            font-size: 0.8rem;
+        }
+        .copy-btn:hover { color: var(--primary); background: rgba(9, 153, 153, 0.1); }
+
+        /* Kanban Board Enhancements */
         .kanban-board {
             display: flex;
             gap: 1rem;
@@ -134,52 +174,41 @@
             scroll-behavior: smooth;
         }
 
-        .kanban-column {
-            flex: 1;
-            min-width: 280px;
-            background: #f4f6f8;
-            border-radius: var(--border-radius);
-            padding: 1.2rem;
-            display: flex;
-            flex-direction: column;
-            border: 1px solid #edf2f7;
+        .accordion-item {
+            background-color: var(--card-bg) !important;
+            border-color: var(--glass-border) !important;
+        }
+        .accordion-button {
+            background-color: var(--card-bg) !important;
+            color: var(--text-dark) !important;
+        }
+        .accordion-body {
+            background-color: rgba(0,0,0,0.02) !important;
+        }
+        [data-bs-theme="dark"] .accordion-body {
+            background-color: rgba(0,0,0,0.2) !important;
         }
 
-        .kanban-column-header {
-            font-weight: 800;
-            margin-bottom: 1.2rem;
-            padding-bottom: 0.8rem;
-            border-bottom: 2px solid rgba(0, 0, 0, 0.05);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .kanban-items {
-            flex-grow: 1;
-            min-height: 300px;
-        }
-
-        /* Order Cards */
+        /* Order Cards with Hover Micro-interactions */
         .order-card {
             cursor: pointer;
             border-right: 6px solid #ddd;
             margin-bottom: 1.2rem;
             padding: 1.2rem;
             position: relative;
-            background: #fff;
+            background: var(--card-bg);
             border-radius: 12px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.02);
-            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: var(--shadow-sm);
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s;
+            color: var(--text-dark);
         }
 
-        .order-card:active {
-            transform: scale(0.98);
-        }
+        .order-card:active { transform: scale(0.96); }
 
         .order-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-md);
+            z-index: 2;
         }
 
         /* Borders */
@@ -192,10 +221,24 @@
         .stored-border { border-right-color: var(--status-stored); }
 
         .card-ghost {
-            opacity: 0.5;
-            background-color: #f8f9fa;
+            opacity: 0.4;
+            background-color: rgba(9, 153, 153, 0.1);
             border: 2px dashed var(--primary);
             transform: scale(1.02);
+        }
+
+        /* Skeleton Loaders */
+        .skeleton {
+            background: linear-gradient(90deg, rgba(200,200,200,0.1) 25%, rgba(200,200,200,0.2) 50%, rgba(200,200,200,0.1) 75%);
+            background-size: 200% 100%;
+            animation: loading 1.5s infinite;
+            border-radius: 8px;
+            height: 20px;
+            margin-bottom: 8px;
+        }
+        @keyframes loading {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
         }
 
         /* Dashboard KPIs */
@@ -208,7 +251,11 @@
             justify-content: space-between;
             position: relative;
             overflow: hidden;
+            border: none !important;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+            transition: var(--transition);
         }
+        .kpi-card:hover { transform: translateY(-4px); box-shadow: 0 12px 25px rgba(0,0,0,0.15); }
 
         .kpi-card::after {
             content: '';
@@ -217,69 +264,40 @@
             right: -20%;
             width: 150px;
             height: 150px;
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.15);
             border-radius: 50%;
             transform: rotate(45deg);
         }
 
-        .kpi-card i {
-            font-size: 3rem;
-            opacity: 0.9;
-            z-index: 1;
-        }
-
-        .kpi-title {
-            font-size: 1.1rem;
-            font-weight: 600;
-            opacity: 0.9;
-            margin-bottom: 0.5rem;
-            z-index: 1;
-            position: relative;
-        }
-
-        .kpi-value {
-            font-size: 2.2rem;
-            font-weight: 800;
-            margin: 0;
-            z-index: 1;
-            position: relative;
-        }
+        .kpi-card i { font-size: 3rem; opacity: 0.9; z-index: 1; }
+        .kpi-title { font-size: 1.1rem; font-weight: 600; opacity: 0.9; margin-bottom: 0.5rem; z-index: 1; position: relative; }
+        .kpi-value { font-size: 2.2rem; font-weight: 800; margin: 0; z-index: 1; position: relative; }
 
         .bg-gradient-primary { background: linear-gradient(135deg, var(--primary) 0%, #11cdef 100%); }
         .bg-gradient-warning { background: linear-gradient(135deg, #f5365c 0%, #fb6340 100%); }
         .bg-gradient-success { background: linear-gradient(135deg, #2dce89 0%, #2dcecc 100%); }
         .bg-gradient-info { background: linear-gradient(135deg, #1171ef 0%, #11cdef 100%); }
-        .bg-gradient-dark { background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%); }
+        .bg-gradient-dark { background: linear-gradient(135deg, #2c3e50 0%, #1a252f 100%); }
 
         /* Priority & Tags */
-        .badge-priority-high {
-            background-color: #ffeaa7;
-            color: #d63031;
-            border: 1px solid #d63031;
-        }
-
-        .badge-priority-med { background-color: #eccc68; color: #2f3542; }
-        .badge-priority-low { background-color: #7bed9f; color: #2f3542; }
-
         .role-badge {
             padding: 0.4rem 0.8rem;
             border-radius: 20px;
             font-size: 0.8rem;
             font-weight: bold;
         }
-
-        .role-admin { background-color: rgba(9, 153, 153, 0.15); color: var(--primary-dark); }
+        .role-admin { background-color: rgba(9, 153, 153, 0.15); color: var(--primary); }
         .role-user { background-color: rgba(108, 117, 125, 0.15); color: #6c757d; }
         .role-delivery { background-color: rgba(23, 162, 184, 0.15); color: #17a2b8; }
 
         /* Table */
         .table-custom {
-            background: white;
+            background: var(--card-bg);
             border-radius: var(--border-radius);
             overflow: hidden;
             box-shadow: var(--shadow-sm);
         }
-
+        .table-custom table { color: var(--text-dark); }
         .table-custom th {
             background: var(--secondary);
             color: white;
@@ -290,15 +308,13 @@
             top: 0;
             z-index: 10;
         }
-
         .table-custom td {
             padding: 1.2rem 1rem;
             vertical-align: middle;
-            border-bottom: 1px solid #f1f2f6;
+            border-bottom: 1px solid var(--glass-border);
             transition: background 0.2s;
         }
-
-        .table-custom tbody tr:hover td { background-color: #f8f9fa; }
+        .table-custom tbody tr:hover td { background-color: rgba(9, 153, 153, 0.05); }
 
         /* Auth Screen */
         #authScreen {
@@ -311,6 +327,7 @@
             justify-content: center;
             align-items: center;
         }
+        [data-bs-theme="dark"] #authScreen { background: linear-gradient(135deg, #121418 0%, #1e2126 100%); }
 
         /* Utilities */
         .admin-only { display: none; }
@@ -322,20 +339,21 @@
             padding: 1rem;
             text-align: center;
             transition: all 0.2s;
-            background: white;
-            border: 1px solid rgba(0, 0, 0, 0.05);
+            background: var(--card-bg);
+            border: 1px solid var(--glass-border);
             height: 100%;
+            box-shadow: var(--shadow-sm);
         }
-
+        .stage-card:hover { transform: translateY(-3px); }
         .stage-card .count { font-size: 2rem; font-weight: 800; }
         .stage-card .total { font-size: 1rem; font-weight: bold; }
 
         ::-webkit-scrollbar { width: 8px; height: 8px; }
-        ::-webkit-scrollbar-track { background: #f1f1f1; border-radius: 4px; }
-        ::-webkit-scrollbar-thumb { background: #b2bec3; border-radius: 4px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: rgba(128,128,128,0.4); border-radius: 4px; }
         ::-webkit-scrollbar-thumb:hover { background: var(--primary); }
 
-        /* Mobile adjustments (Original) */
+        /* Mobile adjustments */
         @media (max-width: 768px) {
             .kpi-value { font-size: 1.5rem; }
             .nav-pills .nav-link { padding: 0.5rem 0.8rem; font-size: 0.8rem; }
@@ -345,24 +363,21 @@
         }
 
         /* --- MOBILE APP FEEL STYLES --- */
-        .mobile-bottom-nav {
-            display: none;
-        }
+        .mobile-bottom-nav { display: none; }
 
         @media (max-width: 991px) {
             body { 
                 overscroll-behavior-y: none; 
                 -webkit-tap-highlight-color: transparent; 
-                padding-bottom: 80px; 
+                padding-bottom: 85px; 
             }
             
-            /* Transform Top Nav into App Header */
             .navbar { padding: 0.8rem 0; margin-bottom: 1rem; position: sticky; top: 0; z-index: 1040; }
             .navbar-toggler { display: none !important; }
             .navbar-collapse { display: flex !important; flex-basis: auto !important; }
             .navbar-collapse .nav-pills { display: none !important; }
             .navbar .border-start { border: none !important; margin: 0 !important; padding: 0 !important; }
-            #currentUserDisplay { display: none !important; } /* Hide name to save space, keep role badge if needed or just avatar */
+            #currentUserDisplay { display: none !important; } 
             #userRoleBadge { margin-top: 0 !important; }
             
             /* Bottom Navigation Bar */
@@ -372,15 +387,17 @@
                 bottom: 0;
                 left: 0;
                 width: 100%;
-                background: #ffffff;
-                box-shadow: 0 -5px 15px rgba(0,0,0,0.05);
+                background: var(--glass-bg);
+                backdrop-filter: blur(15px);
+                -webkit-backdrop-filter: blur(15px);
+                box-shadow: 0 -5px 15px rgba(0,0,0,0.1);
                 padding: 0.5rem 0;
                 padding-bottom: env(safe-area-inset-bottom, 0.5rem);
                 z-index: 1050;
                 overflow-x: auto;
                 white-space: nowrap;
                 justify-content: flex-start;
-                border-top: 1px solid #eee;
+                border-top: 1px solid var(--glass-border);
             }
             .bottom-nav-link {
                 background: none;
@@ -395,17 +412,42 @@
                 flex: 1 0 auto;
                 min-width: 75px;
                 transition: var(--transition);
+                position: relative;
+                overflow: hidden;
             }
+            /* Ripple effect hack */
+            .bottom-nav-link:active { background: rgba(9, 153, 153, 0.1); border-radius: 12px; }
             .bottom-nav-link i { font-size: 1.3rem; margin-bottom: 5px; }
             .bottom-nav-link.active { color: var(--primary); transform: translateY(-2px); }
             .bottom-nav-link.active i { color: var(--primary); }
 
             /* Bottom Sheet Modal */
             .modal-dialog { margin: auto 0 0 0; align-items: flex-end; min-height: 100%; }
-            .modal-content { border-radius: 24px 24px 0 0; max-height: 90vh; }
+            .modal-content { border-radius: 24px 24px 0 0; max-height: 90vh; background: var(--card-bg); }
             
-            /* Make form elements mobile friendly (prevent zoom) */
-            .form-control, .form-select { font-size: 16px; }
+            .form-control, .form-select { font-size: 16px; } /* prevent zoom */
+        }
+
+        /* Timeline in modal */
+        .timeline-small {
+            border-right: 2px solid var(--primary);
+            padding-right: 15px;
+            margin-right: 10px;
+        }
+        .timeline-item {
+            position: relative;
+            margin-bottom: 15px;
+        }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            right: -21px;
+            top: 5px;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--primary);
+            border: 2px solid var(--card-bg);
         }
     </style>
 </head>
@@ -421,12 +463,12 @@
             </div>
             <form id="loginForm">
                 <div class="input-group mb-3 shadow-sm" style="border-radius: 12px; overflow: hidden;">
-                    <span class="input-group-text bg-white border-0"><i class="fas fa-user text-muted"></i></span>
-                    <input type="text" id="loginUser" class="form-control border-0 bg-white" placeholder="اسم المستخدم" required>
+                    <span class="input-group-text border-0" style="background:var(--bg-color)"><i class="fas fa-user text-muted"></i></span>
+                    <input type="text" id="loginUser" class="form-control border-0" placeholder="اسم المستخدم" required>
                 </div>
                 <div class="input-group mb-4 shadow-sm" style="border-radius: 12px; overflow: hidden;">
-                    <span class="input-group-text bg-white border-0"><i class="fas fa-lock text-muted"></i></span>
-                    <input type="password" id="loginPass" class="form-control border-0 bg-white" placeholder="كلمة المرور" required>
+                    <span class="input-group-text border-0" style="background:var(--bg-color)"><i class="fas fa-lock text-muted"></i></span>
+                    <input type="password" id="loginPass" class="form-control border-0" placeholder="كلمة المرور" required>
                 </div>
                 <button type="submit" class="btn btn-main w-100 py-3 fs-5 shadow">تسجيل الدخول <i class="fas fa-sign-in-alt ms-2"></i></button>
             </form>
@@ -452,10 +494,11 @@
                     </ul>
                     <div class="d-flex align-items-center border-start ps-3 ms-3">
                         <div class="text-end me-3">
-                            <div id="currentUserDisplay" class="fw-bold text-dark lh-1"></div>
+                            <div id="currentUserDisplay" class="fw-bold lh-1"></div>
                             <small id="userRoleBadge" class="role-badge mt-1 d-inline-block"></small>
                         </div>
-                        <button class="btn btn-light text-danger shadow-sm rounded-circle p-2" onclick="app.logout()" title="تسجيل الخروج"><i class="fas fa-power-off"></i></button>
+                        <button class="btn btn-outline-secondary rounded-circle me-2 p-2 shadow-sm" id="darkModeToggle" onclick="app.toggleDarkMode()" title="تغيير المظهر"><i class="fas fa-moon"></i></button>
+                        <button class="btn btn-light text-danger shadow-sm rounded-circle p-2" style="background:var(--card-bg)" onclick="app.logout()" title="تسجيل الخروج"><i class="fas fa-power-off"></i></button>
                     </div>
                 </div>
             </div>
@@ -545,51 +588,92 @@
             </div>
 
             <div id="tab-entry" class="tab-content" style="display:none;">
-                <div class="card p-5 mx-auto shadow" style="max-width: 900px;">
+                <div class="card p-5 mx-auto shadow-lg" style="max-width: 900px; border-radius: 20px;">
                     <div class="text-center mb-5">
                         <h3 class="fw-bold" style="color: var(--primary);">إضافة طلبية جديدة</h3>
                         <p class="text-muted">الرجاء تعبئة كافة الحقول بدقة</p>
+                        <p class="small text-muted mb-0"><i class="fas fa-keyboard"></i> تلميح: استخدم <kbd>Alt</kbd> + <kbd>N</kbd> لفتح هذه الشاشة من أي مكان</p>
                     </div>
                     <form id="orderForm" class="row g-4">
                         <div class="col-md-6">
                             <label class="form-label text-muted fw-bold small"><i class="fas fa-user text-primary"></i> المدخل الحالي</label>
-                            <select id="entryUserSelect" class="form-select bg-light fw-bold text-primary border-0" required>
+                            <select id="entryUserSelect" class="form-select fw-bold text-primary border-0" style="background:var(--bg-color)" required>
                                 <option value="">جاري التحميل...</option>
                             </select>
                         </div>
-                        <div class="col-md-6"><label class="form-label text-muted fw-bold small"><i class="fas fa-calendar text-primary"></i> تاريخ الإدخال</label><input type="text" id="entryDate" class="form-control bg-light border-0 fw-bold" readonly></div>
+                        <div class="col-md-6">
+                            <label class="form-label text-muted fw-bold small"><i class="fas fa-calendar text-primary"></i> تاريخ الإدخال</label>
+                            <input type="text" id="entryDate" class="form-control border-0 fw-bold" style="background:var(--bg-color)" readonly>
+                        </div>
                         
                         <div class="col-12"><hr class="text-muted opacity-25"></div>
                         
-                        <div class="col-md-4"><label class="form-label fw-bold">اسم الزبون <span class="text-danger">*</span></label><input type="text" id="custName" class="form-control" required placeholder="الاسم الرباعي"></div>
-                        
                         <div class="col-md-4">
-                            <label class="form-label fw-bold">الدولة <span class="text-danger">*</span></label>
-                            <select id="countrySelect" class="form-select" required onchange="app.updateCountry()">
-                                <option value="Jordan" selected>الأردن</option>
-                                <option value="Palestine">فلسطين</option>
-                            </select>
+                            <div class="form-floating">
+                                <input type="text" id="custName" class="form-control" required placeholder="الاسم الرباعي">
+                                <label for="custName" class="fw-bold">اسم الزبون <span class="text-danger">*</span></label>
+                            </div>
                         </div>
                         
                         <div class="col-md-4">
-                            <label class="form-label fw-bold">المحافظة <span class="text-danger">*</span></label>
-                            <select id="governorateSelect" class="form-select" required>
-                            </select>
+                            <div class="form-floating">
+                                <select id="countrySelect" class="form-select" required onchange="app.updateCountry()">
+                                    <option value="Jordan" selected>الأردن</option>
+                                    <option value="Palestine">فلسطين</option>
+                                </select>
+                                <label for="countrySelect" class="fw-bold">الدولة <span class="text-danger">*</span></label>
+                            </div>
                         </div>
-
-                        <div class="col-md-6"><label class="form-label fw-bold">العنوان التفصيلي <span class="text-danger">*</span></label><input type="text" id="custAddr" class="form-control" required placeholder="المنطقة - الشارع - المعلم"></div>
-                        <div class="col-md-6">
-                            <label class="form-label fw-bold">الموبايل <span class="text-danger">*</span></label>
-                            <div class="input-group">
-                                <span class="input-group-text bg-light fw-bold" id="phonePrefix" dir="ltr">+962</span>
-                                <input type="text" id="custMob" class="form-control" placeholder="رقم الهاتف بدون الصفر" required>
+                        
+                        <div class="col-md-4">
+                            <div class="form-floating">
+                                <select id="governorateSelect" class="form-select" required></select>
+                                <label for="governorateSelect" class="fw-bold">المحافظة <span class="text-danger">*</span></label>
                             </div>
                         </div>
 
-                        <div class="col-md-3"><label class="form-label fw-bold">الموديل <span class="text-danger">*</span></label><select id="modelSelect" class="form-select" required><option value="">اختر الموديل</option></select></div>
-                        <div class="col-md-2"><label class="form-label fw-bold">النمرة <span class="text-danger">*</span></label><input type="text" id="size" class="form-control" required></div>
-                        <div class="col-md-2"><label class="form-label fw-bold">الوزن <small class="text-muted">(kg)</small> <span class="text-danger">*</span></label><input type="number" step="0.1" id="weight" class="form-control" required></div>
-                        <div class="col-md-2"><label class="form-label fw-bold">الطول <small class="text-muted">(cm)</small> <span class="text-danger">*</span></label><input type="number" id="height" class="form-control" required></div>
+                        <div class="col-md-6">
+                            <div class="form-floating">
+                                <input type="text" id="custAddr" class="form-control" required placeholder="المنطقة - الشارع - المعلم">
+                                <label for="custAddr" class="fw-bold">العنوان التفصيلي <span class="text-danger">*</span></label>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-6">
+                            <label class="form-label fw-bold">الموبايل <span class="text-danger">*</span></label>
+                            <div class="input-group">
+                                <span class="input-group-text fw-bold" style="background:var(--bg-color)" id="phonePrefix" dir="ltr">+962</span>
+                                <input type="text" id="custMob" class="form-control" placeholder="مثال: 79 123 4567" required dir="ltr">
+                            </div>
+                            <div id="duplicateWarning" class="alert alert-warning mt-2 py-2 small shadow-sm rounded-3" style="display:none; border-right: 4px solid #ffc107;">
+                                <i class="fas fa-exclamation-triangle me-1"></i> <span id="dupMsg"></span>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <div class="form-floating">
+                                <select id="modelSelect" class="form-select" required><option value="">اختر الموديل</option></select>
+                                <label for="modelSelect" class="fw-bold">الموديل <span class="text-danger">*</span></label>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-floating">
+                                <input type="text" id="size" class="form-control" required placeholder="النمرة">
+                                <label for="size" class="fw-bold">النمرة <span class="text-danger">*</span></label>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-floating">
+                                <input type="number" step="0.1" id="weight" class="form-control" required placeholder="الوزن">
+                                <label for="weight" class="fw-bold">الوزن (kg) <span class="text-danger">*</span></label>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-floating">
+                                <input type="number" id="height" class="form-control" required placeholder="الطول">
+                                <label for="height" class="fw-bold">الطول (cm) <span class="text-danger">*</span></label>
+                            </div>
+                        </div>
                         
                         <div class="col-md-3">
                             <label class="form-label fw-bold">سعر شامل التوصيل <span class="text-danger">*</span></label>
@@ -599,8 +683,18 @@
                             </div>
                         </div>
 
-                        <div class="col-md-6"><label class="form-label fw-bold">اسم الصفحة (المصدر) <span class="text-danger">*</span></label><select id="pageNameSelect" class="form-select" required><option value="">اختر الصفحة</option></select></div>
-                        <div class="col-md-6"><label class="form-label fw-bold"> ملاحظات</label><input type="text" id="tags" class="form-control" placeholder="مثال: vip, هدية, توصيل مجاني"></div>
+                        <div class="col-md-6">
+                            <div class="form-floating">
+                                <select id="pageNameSelect" class="form-select" required><option value="">اختر الصفحة</option></select>
+                                <label for="pageNameSelect" class="fw-bold">اسم الصفحة (المصدر) <span class="text-danger">*</span></label>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-floating">
+                                <input type="text" id="tags" class="form-control" placeholder="مثال: vip, هدية, توصيل مجاني">
+                                <label for="tags" class="fw-bold">ملاحظات (Tags)</label>
+                            </div>
+                        </div>
                         
                         <div class="col-12 mt-5">
                             <button type="submit" class="btn btn-main w-100 py-3 fs-5 rounded-pill"><i class="fas fa-save me-2"></i> حفظ واعتماد الطلب</button>
@@ -611,11 +705,14 @@
             </div>
 
             <div id="tab-kanban" class="tab-content" style="display:none;">
-                <div class="d-flex justify-content-between align-items-center mb-4 bg-white p-3 rounded-4 shadow-sm">
-                    <h4 class="fw-bold m-0"><i class="fas fa-list-ul text-primary me-2"></i> بورد الطلبات (القوائم الموسعة)</h4>
+                <div class="d-flex justify-content-between align-items-center mb-4 p-3 rounded-4 shadow-sm" style="background:var(--card-bg)">
+                    <div>
+                        <h4 class="fw-bold m-0"><i class="fas fa-list-ul text-primary me-2"></i> بورد الطلبات (القوائم الموسعة)</h4>
+                        <small class="text-muted"><i class="fas fa-keyboard"></i> <kbd>Ctrl</kbd> + <kbd>/</kbd> للبحث السريع</small>
+                    </div>
                     <div class="input-group" style="width: 350px;">
-                        <span class="input-group-text bg-light border-0"><i class="fas fa-search"></i></span>
-                        <input type="text" id="kanbanSearch" class="form-control bg-light border-0" placeholder="بحث سريع..." onkeyup="app.filterKanban()">
+                        <span class="input-group-text border-0" style="background:var(--bg-color)"><i class="fas fa-search"></i></span>
+                        <input type="text" id="kanbanSearch" class="form-control border-0" style="background:var(--bg-color)" placeholder="بحث سريع..." onkeyup="app.filterKanban()">
                     </div>
                 </div>
 
@@ -648,93 +745,93 @@
 
                 <div class="accordion" id="kanbanAccordion">
                     <div class="accordion-item mb-3 border-0 shadow-sm rounded-4 overflow-hidden">
-                        <h2 class="accordion-header">
-                            <button class="accordion-button fw-bold fs-5" type="button" data-bs-toggle="collapse" data-bs-target="#colNew">
+                        <h2 class="accordion-header" style="position:sticky; top:80px; z-index:100;">
+                            <button class="accordion-button fw-bold fs-5 shadow-sm" type="button" data-bs-toggle="collapse" data-bs-target="#colNew">
                                 <i class="fas fa-star text-warning me-2"></i> 1. طلبات جديدة
                                 <span class="ms-auto me-2 badge bg-warning text-dark rounded-pill" id="kb-count-new">0</span>
-                                <span class="badge bg-light text-dark border me-3" id="kb-total-new">0</span>
+                                <span class="badge text-dark border me-3" style="background:var(--bg-color)" id="kb-total-new">0</span>
                             </button>
                         </h2>
                         <div id="colNew" class="accordion-collapse collapse show" data-bs-parent="#kanbanAccordion">
-                            <div class="accordion-body bg-light"><div class="d-flex flex-wrap gap-3" id="kb-new" data-status="new"></div></div>
+                            <div class="accordion-body"><div class="d-flex flex-wrap gap-3" id="kb-new" data-status="new"><div class="skeleton w-100"></div></div></div>
                         </div>
                     </div>
                     
                     <div class="accordion-item mb-3 border-0 shadow-sm rounded-4 overflow-hidden">
-                        <h2 class="accordion-header">
-                            <button class="accordion-button collapsed fw-bold fs-5" type="button" data-bs-toggle="collapse" data-bs-target="#colProc">
+                        <h2 class="accordion-header" style="position:sticky; top:80px; z-index:100;">
+                            <button class="accordion-button collapsed fw-bold fs-5 shadow-sm" type="button" data-bs-toggle="collapse" data-bs-target="#colProc">
                                 <i class="fas fa-cog text-info me-2"></i> 2. قيد التحضير
                                 <span class="ms-auto me-2 badge bg-info text-white rounded-pill" id="kb-count-process">0</span>
-                                <span class="badge bg-light text-dark border me-3" id="kb-total-process">0</span>
+                                <span class="badge text-dark border me-3" style="background:var(--bg-color)" id="kb-total-process">0</span>
                             </button>
                         </h2>
                         <div id="colProc" class="accordion-collapse collapse" data-bs-parent="#kanbanAccordion">
-                            <div class="accordion-body bg-light"><div class="d-flex flex-wrap gap-3" id="kb-process" data-status="process"></div></div>
+                            <div class="accordion-body"><div class="d-flex flex-wrap gap-3" id="kb-process" data-status="process"></div></div>
                         </div>
                     </div>
                     
                     <div class="accordion-item mb-3 border-0 shadow-sm rounded-4 overflow-hidden">
-                        <h2 class="accordion-header">
-                            <button class="accordion-button collapsed fw-bold fs-5" type="button" data-bs-toggle="collapse" data-bs-target="#colDone">
+                        <h2 class="accordion-header" style="position:sticky; top:80px; z-index:100;">
+                            <button class="accordion-button collapsed fw-bold fs-5 shadow-sm" type="button" data-bs-toggle="collapse" data-bs-target="#colDone">
                                 <i class="fas fa-box text-success me-2"></i> 3. جاهزة للتسليم
                                 <span class="ms-auto me-2 badge bg-success text-white rounded-pill" id="kb-count-done">0</span>
-                                <span class="badge bg-light text-dark border me-3" id="kb-total-done">0</span>
+                                <span class="badge text-dark border me-3" style="background:var(--bg-color)" id="kb-total-done">0</span>
                             </button>
                         </h2>
                         <div id="colDone" class="accordion-collapse collapse" data-bs-parent="#kanbanAccordion">
-                            <div class="accordion-body bg-light"><div class="d-flex flex-wrap gap-3" id="kb-done" data-status="done"></div></div>
+                            <div class="accordion-body"><div class="d-flex flex-wrap gap-3" id="kb-done" data-status="done"></div></div>
                         </div>
                     </div>
                     
                     <div class="accordion-item mb-3 border-0 shadow-sm rounded-4 overflow-hidden">
-                        <h2 class="accordion-header">
-                            <button class="accordion-button collapsed fw-bold fs-5" type="button" data-bs-toggle="collapse" data-bs-target="#colDeliv">
+                        <h2 class="accordion-header" style="position:sticky; top:80px; z-index:100;">
+                            <button class="accordion-button collapsed fw-bold fs-5 shadow-sm" type="button" data-bs-toggle="collapse" data-bs-target="#colDeliv">
                                 <i class="fas fa-check-double text-dark me-2"></i> 4. تم التسليم
                                 <span class="ms-auto me-2 badge text-white rounded-pill" style="background:#273c75" id="kb-count-delivered">0</span>
-                                <span class="badge bg-light text-dark border me-3" id="kb-total-delivered">0</span>
+                                <span class="badge text-dark border me-3" style="background:var(--bg-color)" id="kb-total-delivered">0</span>
                             </button>
                         </h2>
                         <div id="colDeliv" class="accordion-collapse collapse" data-bs-parent="#kanbanAccordion">
-                            <div class="accordion-body bg-light"><div class="d-flex flex-wrap gap-3" id="kb-delivered" data-status="delivered"></div></div>
+                            <div class="accordion-body"><div class="d-flex flex-wrap gap-3" id="kb-delivered" data-status="delivered"></div></div>
                         </div>
                     </div>
                     
                     <div class="accordion-item mb-3 border-0 shadow-sm rounded-4 overflow-hidden">
-                        <h2 class="accordion-header">
-                            <button class="accordion-button collapsed fw-bold fs-5" type="button" data-bs-toggle="collapse" data-bs-target="#colPost">
+                        <h2 class="accordion-header" style="position:sticky; top:80px; z-index:100;">
+                            <button class="accordion-button collapsed fw-bold fs-5 shadow-sm" type="button" data-bs-toggle="collapse" data-bs-target="#colPost">
                                 <i class="fas fa-clock text-warning me-2" style="color:var(--status-postponed)!important"></i> 5. مؤجل
                                 <span class="ms-auto me-2 badge text-white rounded-pill" style="background:var(--status-postponed)" id="kb-count-postponed">0</span>
-                                <span class="badge bg-light text-dark border me-3" id="kb-total-postponed">0</span>
+                                <span class="badge text-dark border me-3" style="background:var(--bg-color)" id="kb-total-postponed">0</span>
                             </button>
                         </h2>
                         <div id="colPost" class="accordion-collapse collapse" data-bs-parent="#kanbanAccordion">
-                            <div class="accordion-body bg-light"><div class="d-flex flex-wrap gap-3" id="kb-postponed" data-status="postponed"></div></div>
+                            <div class="accordion-body"><div class="d-flex flex-wrap gap-3" id="kb-postponed" data-status="postponed"></div></div>
                         </div>
                     </div>
                     
                     <div class="accordion-item mb-3 border-0 shadow-sm rounded-4 overflow-hidden">
-                        <h2 class="accordion-header">
-                            <button class="accordion-button collapsed fw-bold fs-5" type="button" data-bs-toggle="collapse" data-bs-target="#colCanc">
+                        <h2 class="accordion-header" style="position:sticky; top:80px; z-index:100;">
+                            <button class="accordion-button collapsed fw-bold fs-5 shadow-sm" type="button" data-bs-toggle="collapse" data-bs-target="#colCanc">
                                 <i class="fas fa-times-circle text-danger me-2"></i> 6. ملغي
                                 <span class="ms-auto me-2 badge bg-danger text-white rounded-pill" id="kb-count-canceled">0</span>
-                                <span class="badge bg-light text-dark border me-3" id="kb-total-canceled">0</span>
+                                <span class="badge text-dark border me-3" style="background:var(--bg-color)" id="kb-total-canceled">0</span>
                             </button>
                         </h2>
                         <div id="colCanc" class="accordion-collapse collapse" data-bs-parent="#kanbanAccordion">
-                            <div class="accordion-body bg-light"><div class="d-flex flex-wrap gap-3" id="kb-canceled" data-status="canceled"></div></div>
+                            <div class="accordion-body"><div class="d-flex flex-wrap gap-3" id="kb-canceled" data-status="canceled"></div></div>
                         </div>
                     </div>
                     
                     <div class="accordion-item mb-3 border-0 shadow-sm rounded-4 overflow-hidden">
-                        <h2 class="accordion-header">
-                            <button class="accordion-button collapsed fw-bold fs-5" type="button" data-bs-toggle="collapse" data-bs-target="#colStore">
+                        <h2 class="accordion-header" style="position:sticky; top:80px; z-index:100;">
+                            <button class="accordion-button collapsed fw-bold fs-5 shadow-sm" type="button" data-bs-toggle="collapse" data-bs-target="#colStore">
                                 <i class="fas fa-warehouse text-secondary me-2"></i> 7. مخزن
                                 <span class="ms-auto me-2 badge bg-secondary text-white rounded-pill" id="kb-count-stored">0</span>
-                                <span class="badge bg-light text-dark border me-3" id="kb-total-stored">0</span>
+                                <span class="badge text-dark border me-3" style="background:var(--bg-color)" id="kb-total-stored">0</span>
                             </button>
                         </h2>
                         <div id="colStore" class="accordion-collapse collapse" data-bs-parent="#kanbanAccordion">
-                            <div class="accordion-body bg-light"><div class="d-flex flex-wrap gap-3" id="kb-stored" data-status="stored"></div></div>
+                            <div class="accordion-body"><div class="d-flex flex-wrap gap-3" id="kb-stored" data-status="stored"></div></div>
                         </div>
                     </div>
                 </div>
@@ -744,7 +841,7 @@
                 <div class="card p-4 mb-4 shadow-sm border-0">
                     <div class="d-flex justify-content-between align-items-center mb-4">
                         <h5 class="fw-bold text-secondary m-0"><i class="fas fa-filter text-primary me-2"></i> محرك البحث والفلاتر</h5>
-                        <button class="btn btn-success" onclick="app.exportExcel()"><i class="fas fa-file-excel me-1"></i> تنزيل كملف اكسل</button>
+                        <button class="btn btn-success rounded-pill px-4" onclick="app.exportExcel()"><i class="fas fa-file-excel me-2"></i> تصدير Excel</button>
                     </div>
                     <div class="row g-3">
                         <div class="col-md-3"><label class="form-label small fw-bold">بحث شامل</label><input type="text" id="filterGeneral" class="form-control" placeholder="اسم، موبايل، عنوان..."></div>
@@ -770,7 +867,7 @@
                                 <input type="date" id="filterDateTo" class="form-control">
                             </div>
                         </div>
-                        <div class="col-md-2 d-flex align-items-end"><button class="btn btn-secondary w-100" onclick="app.resetFilters()"><i class="fas fa-undo me-1"></i>إعادة ضبط</button></div>
+                        <div class="col-md-12 d-flex justify-content-end"><button class="btn btn-secondary rounded-pill px-4" onclick="app.resetFilters()"><i class="fas fa-undo me-1"></i> إعادة ضبط</button></div>
                     </div>
                 </div>
 
@@ -780,49 +877,49 @@
                             <div class="stage-card">
                                 <div class="text-warning fw-bold fs-6">جديدة</div>
                                 <div class="count text-warning" id="cardCountNew">0</div>
-                                <div class="total text-dark small" id="cardTotalNew">0</div>
+                                <div class="total text-muted small" id="cardTotalNew">0</div>
                             </div>
                         </div>
                         <div class="col-md-3 col-lg-auto flex-fill">
                             <div class="stage-card">
                                 <div class="text-info fw-bold fs-6">تحضير</div>
                                 <div class="count text-info" id="cardCountProcess">0</div>
-                                <div class="total text-dark small" id="cardTotalProcess">0</div>
+                                <div class="total text-muted small" id="cardTotalProcess">0</div>
                             </div>
                         </div>
                         <div class="col-md-3 col-lg-auto flex-fill">
                             <div class="stage-card">
                                 <div class="text-success fw-bold fs-6">جاهزة</div>
                                 <div class="count text-success" id="cardCountDone">0</div>
-                                <div class="total text-dark small" id="cardTotalDone">0</div>
+                                <div class="total text-muted small" id="cardTotalDone">0</div>
                             </div>
                         </div>
                         <div class="col-md-3 col-lg-auto flex-fill">
                             <div class="stage-card">
-                                <div class="text-dark fw-bold fs-6" style="color: var(--status-delivered) !important;">مسلمة</div>
+                                <div class="fw-bold fs-6" style="color: var(--status-delivered) !important;">مسلمة</div>
                                 <div class="count" style="color: var(--status-delivered);" id="cardCountDelivered">0</div>
-                                <div class="total text-dark small" id="cardTotalDelivered">0</div>
+                                <div class="total text-muted small" id="cardTotalDelivered">0</div>
                             </div>
                         </div>
                         <div class="col-md-3 col-lg-auto flex-fill">
                             <div class="stage-card">
                                 <div class="fw-bold fs-6" style="color: var(--status-postponed);">مؤجل</div>
                                 <div class="count" style="color: var(--status-postponed);" id="cardCountPostponed">0</div>
-                                <div class="total text-dark small" id="cardTotalPostponed">0</div>
+                                <div class="total text-muted small" id="cardTotalPostponed">0</div>
                             </div>
                         </div>
                         <div class="col-md-3 col-lg-auto flex-fill">
                             <div class="stage-card">
                                 <div class="fw-bold fs-6" style="color: var(--status-canceled);">ملغي</div>
                                 <div class="count" style="color: var(--status-canceled);" id="cardCountCanceled">0</div>
-                                <div class="total text-dark small" id="cardTotalCanceled">0</div>
+                                <div class="total text-muted small" id="cardTotalCanceled">0</div>
                             </div>
                         </div>
                         <div class="col-md-3 col-lg-auto flex-fill">
                             <div class="stage-card">
                                 <div class="fw-bold fs-6" style="color: var(--status-stored);">مخزن</div>
                                 <div class="count" style="color: var(--status-stored);" id="cardCountStored">0</div>
-                                <div class="total text-dark small" id="cardTotalStored">0</div>
+                                <div class="total text-muted small" id="cardTotalStored">0</div>
                             </div>
                         </div>
                     </div>
@@ -872,7 +969,7 @@
                                 <th class="text-center">إجراءات</th>
                             </tr>
                         </thead>
-                        <tbody id="tableBody"></tbody>
+                        <tbody id="tableBody"><tr><td colspan="12" class="text-center py-4"><div class="skeleton w-100" style="height:30px"></div></td></tr></tbody>
                     </table>
                 </div>
             </div>
@@ -903,36 +1000,36 @@
             <div id="tab-definitions" class="tab-content" style="display:none;">
                 <div class="row g-4">
                     <div class="col-md-4">
-                        <div class="card p-4">
+                        <div class="card p-4 h-100">
                             <h5 class="fw-bold"><i class="fas fa-file-alt text-primary me-2"></i> تعريف أسماء الصفحات</h5>
                             <hr>
                             <div class="input-group mb-3">
                                 <input type="text" id="newPageName" class="form-control" placeholder="اسم الصفحة">
                                 <button class="btn btn-main" onclick="app.addDefinition('pages', 'newPageName')">إضافة</button>
                             </div>
-                            <ul id="pageNamesList" class="list-group"></ul>
+                            <ul id="pageNamesList" class="list-group list-group-flush rounded border-0"></ul>
                         </div>
                     </div>
                     <div class="col-md-4">
-                        <div class="card p-4">
+                        <div class="card p-4 h-100">
                             <h5 class="fw-bold"><i class="fas fa-cubes text-primary me-2"></i> تعريف أسماء الموديلات</h5>
                             <hr>
                             <div class="input-group mb-3">
                                 <input type="text" id="newModelName" class="form-control" placeholder="اسم الموديل">
                                 <button class="btn btn-main" onclick="app.addDefinition('models', 'newModelName')">إضافة</button>
                             </div>
-                            <ul id="modelNamesList" class="list-group"></ul>
+                            <ul id="modelNamesList" class="list-group list-group-flush rounded border-0"></ul>
                         </div>
                     </div>
                     <div class="col-md-4">
-                        <div class="card p-4">
+                        <div class="card p-4 h-100">
                             <h5 class="fw-bold"><i class="fas fa-user-edit text-primary me-2"></i> تعريف أسماء المدخلين</h5>
                             <hr>
                             <div class="input-group mb-3">
                                 <input type="text" id="newEntryUserName" class="form-control" placeholder="اسم المدخل">
                                 <button class="btn btn-main" onclick="app.addDefinition('entryUsers', 'newEntryUserName')">إضافة</button>
                             </div>
-                            <ul id="entryUsersList" class="list-group"></ul>
+                            <ul id="entryUsersList" class="list-group list-group-flush rounded border-0"></ul>
                         </div>
                     </div>
                 </div>
@@ -942,7 +1039,7 @@
                 <div class="card p-4 shadow-sm border-0">
                     <div class="d-flex justify-content-between align-items-center mb-4">
                         <h5 class="fw-bold text-secondary m-0"><i class="fas fa-history text-primary me-2"></i> سجل حركات النظام (Audit Log)</h5>
-                        <span class="badge bg-light text-dark border"><i class="fas fa-shield-alt text-success me-1"></i> Admin Only</span>
+                        <span class="badge text-dark border" style="background:var(--bg-color)"><i class="fas fa-shield-alt text-success me-1"></i> Admin Only</span>
                     </div>
                     <div class="table-responsive table-custom" style="max-height: 600px; overflow-y: auto;">
                         <table class="table table-hover align-middle mb-0">
@@ -963,7 +1060,7 @@
 
         </div>
 
-        <div class="mobile-bottom-nav shadow-lg" id="mobileBottomNav">
+        <div class="mobile-bottom-nav" id="mobileBottomNav">
             <button class="bottom-nav-link" data-nav="nav-dashboard" onclick="app.showTab('tab-dashboard')">
                 <i class="fas fa-chart-pie"></i><span>الرئيسية</span>
             </button>
@@ -990,19 +1087,19 @@
 
     <div class="modal fade" id="orderDetailModal" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="true">
         <div class="modal-dialog modal-lg modal-dialog-scrollable">
-            <div class="modal-content">
-                <div class="modal-header bg-primary text-white">
+            <div class="modal-content" style="border: 1px solid var(--glass-border); border-radius: 20px;">
+                <div class="modal-header bg-primary text-white" style="border-radius: 20px 20px 0 0;">
                     <h5 class="modal-title"><i class="fas fa-edit me-2"></i> معاينة وتعديل الطلب</h5>
                     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body" id="modalOrderContent"></div>
-                <div class="modal-footer">
-                    <button class="btn btn-secondary" data-bs-dismiss="modal">إغلاق</button>
-                    <button class="btn btn-warning fw-bold text-dark" id="updateOrderBtn"><i class="fas fa-save me-1"></i> حفظ التعديلات</button>
-                    <button class="btn btn-info text-white" id="printOrderBtn"><i class="fas fa-print me-1"></i> طباعة الطلب</button>
+                <div class="modal-footer border-0">
+                    <button class="btn btn-secondary rounded-pill" data-bs-dismiss="modal">إغلاق</button>
+                    <button class="btn btn-warning fw-bold text-dark rounded-pill" id="updateOrderBtn"><i class="fas fa-save me-1"></i> حفظ التعديلات</button>
+                    <button class="btn btn-info text-white rounded-pill" id="printOrderBtn"><i class="fas fa-print me-1"></i> طباعة الطلب</button>
                     <div class="dropdown d-inline-block admin-only">
-                        <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown">نقل إلى مرحلة</button>
-                        <ul class="dropdown-menu">
+                        <button class="btn btn-primary dropdown-toggle rounded-pill" type="button" data-bs-toggle="dropdown">نقل إلى مرحلة</button>
+                        <ul class="dropdown-menu shadow">
                             <li><a class="dropdown-item" href="#" data-stage="new">جديدة</a></li>
                             <li><a class="dropdown-item" href="#" data-stage="process">قيد التحضير</a></li>
                             <li><a class="dropdown-item" href="#" data-stage="done">جاهزة للتسليم</a></li>
@@ -1054,6 +1151,8 @@
             'Palestine': ['القدس', 'رام الله والبيرة', 'الخليل', 'نابلس', 'جنين', 'طولكرم', 'قلقيلية', 'بيت لحم', 'سلفيت', 'طوباس', 'أريحا والأغوار', 'غزة', 'شمال غزة', 'دير البلح', 'خان يونس', 'رفح']
         };
 
+        const statusMapAr = { new: 'جديدة', process: 'تحضير', done: 'جاهزة', delivered: 'مسلمة', postponed: 'مؤجل', canceled: 'ملغي', stored: 'مخزن' };
+
         window.app = {
             currentUser: null,
             currentUserRole: null,
@@ -1069,9 +1168,12 @@
             modalOrderId: null,
             modalOrderData: null,
             lastSavedOrderId: null,
+            isDarkMode: localStorage.getItem('darzaDarkMode') === 'true',
 
             init() {
                 this.bindLogin();
+                this.applyDarkMode();
+                this.setupKeyboardShortcuts();
                 document.getElementById('orderForm').addEventListener('submit', this.saveOrder.bind(this));
                 
                 ['filterGeneral', 'filterStatus', 'filterUser', 'filterModel', 'filterDateFrom', 'filterDateTo'].forEach(id => {
@@ -1081,9 +1183,79 @@
                     });
                 });
                 
+                // Smart Duplicate Detection & Phone Formatter
+                const mobInput = document.getElementById('custMob');
+                if(mobInput) {
+                    mobInput.addEventListener('input', (e) => {
+                        let val = e.target.value.replace(/\D/g, '');
+                        if(val.length > 2) val = val.substring(0,2) + ' ' + val.substring(2);
+                        if(val.length > 6) val = val.substring(0,6) + ' ' + val.substring(6);
+                        e.target.value = val;
+
+                        const rawNumber = val.replace(/\s/g, '');
+                        const dupWarn = document.getElementById('duplicateWarning');
+                        if(rawNumber.length >= 8) {
+                            const fullNum = document.getElementById('phonePrefix').innerText + rawNumber;
+                            const existing = Object.values(this.data).filter(o => o.custMob === fullNum);
+                            if(existing.length > 0) {
+                                dupWarn.style.display = 'block';
+                                document.getElementById('dupMsg').innerText = `تنبيه: هذا الزبون لديه (${existing.length}) طلبات سابقة. يمكنك الاستمرار في الإدخال كطلب جديد أو موديل إضافي.`;
+                            } else {
+                                dupWarn.style.display = 'none';
+                            }
+                        } else {
+                            dupWarn.style.display = 'none';
+                        }
+                    });
+                }
+                
                 document.getElementById('entryDate').value = new Date().toLocaleDateString('en-GB');
                 this.updateCountry(); 
                 this.loadDefinitions();
+            },
+
+            toggleDarkMode() {
+                this.isDarkMode = !this.isDarkMode;
+                localStorage.setItem('darzaDarkMode', this.isDarkMode);
+                this.applyDarkMode();
+                // Re-render charts for color adaptation
+                if(document.querySelector('.tab-content[style*="block"]')?.id === 'tab-dashboard') {
+                    this.renderDashboard();
+                }
+            },
+
+            applyDarkMode() {
+                const html = document.documentElement;
+                const icon = document.querySelector('#darkModeToggle i');
+                if(this.isDarkMode) {
+                    html.setAttribute('data-bs-theme', 'dark');
+                    if(icon) { icon.classList.remove('fa-moon'); icon.classList.add('fa-sun'); }
+                } else {
+                    html.setAttribute('data-bs-theme', 'light');
+                    if(icon) { icon.classList.remove('fa-sun'); icon.classList.add('fa-moon'); }
+                }
+            },
+
+            setupKeyboardShortcuts() {
+                document.addEventListener('keydown', (e) => {
+                    if(!this.currentUser) return;
+                    if(e.altKey && e.key.toLowerCase() === 'n') {
+                        e.preventDefault();
+                        this.showTab('tab-entry');
+                        document.getElementById('custName').focus();
+                    }
+                    if(e.ctrlKey && e.key === '/') {
+                        e.preventDefault();
+                        this.showTab('tab-kanban');
+                        setTimeout(() => document.getElementById('kanbanSearch').focus(), 100);
+                    }
+                });
+            },
+
+            copyToClipboard(text, msg = 'تم النسخ') {
+                navigator.clipboard.writeText(text).then(() => {
+                    this.notify(msg, 'success');
+                });
             },
 
             updateCountry() {
@@ -1101,6 +1273,8 @@
                     phonePrefix.innerText = '+970';
                     currencyLabel.innerText = 'ILS';
                 }
+                // Trigger change to hide dup warning
+                document.getElementById('custMob').dispatchEvent(new Event('input'));
             },
 
             bindLogin() {
@@ -1202,7 +1376,7 @@
 
             notify(msg, type) {
                 const colors = { success: "#28a745", error: "#dc3545", warning: "#ffc107", info: "#17a2b8" };
-                Toastify({ text: msg, duration: 3000, gravity: "bottom", position: "right", style: { background: colors[type] } }).showToast();
+                Toastify({ text: msg, duration: 3000, gravity: "bottom", position: "right", style: { background: colors[type], borderRadius: '8px' } }).showToast();
             },
 
             logAction(actionType, orderId, details) {
@@ -1273,12 +1447,11 @@
 
             renderDefinitions() {
                 if (this.currentUserRole !== 'Admin') return;
-                document.getElementById('pageNamesList').innerHTML = this.pagesList.map(p => `
-                    <li class="list-group-item d-flex justify-content-between"><span>${p.name}</span><button class="btn btn-sm btn-danger" onclick="app.deleteDefinition('pages', '${p.id}')"><i class="fas fa-trash"></i></button></li>`).join('');
-                document.getElementById('modelNamesList').innerHTML = this.modelsList.map(m => `
-                    <li class="list-group-item d-flex justify-content-between"><span>${m.name}</span><button class="btn btn-sm btn-danger" onclick="app.deleteDefinition('models', '${m.id}')"><i class="fas fa-trash"></i></button></li>`).join('');
-                document.getElementById('entryUsersList').innerHTML = this.entryUsersList.map(u => `
-                    <li class="list-group-item d-flex justify-content-between"><span>${u.name}</span><button class="btn btn-sm btn-danger" onclick="app.deleteDefinition('entryUsers', '${u.id}')"><i class="fas fa-trash"></i></button></li>`).join('');
+                const getLi = (name, path, id) => `<li class="list-group-item d-flex justify-content-between align-items-center bg-transparent border-bottom"><span>${name}</span><button class="btn btn-sm btn-outline-danger border-0 rounded-circle" onclick="app.deleteDefinition('${path}', '${id}')"><i class="fas fa-trash"></i></button></li>`;
+                
+                document.getElementById('pageNamesList').innerHTML = this.pagesList.map(p => getLi(p.name, 'pages', p.id)).join('');
+                document.getElementById('modelNamesList').innerHTML = this.modelsList.map(m => getLi(m.name, 'models', m.id)).join('');
+                document.getElementById('entryUsersList').innerHTML = this.entryUsersList.map(u => getLi(u.name, 'entryUsers', u.id)).join('');
             },
 
             startListener() {
@@ -1318,6 +1491,7 @@
                 const country = document.getElementById('countrySelect').value;
                 const currency = document.getElementById('currencyLabel').innerText;
                 const phonePrefix = document.getElementById('phonePrefix').innerText;
+                const rawMob = document.getElementById('custMob').value.replace(/\s/g, '');
                 
                 const payload = {
                     date: document.getElementById('entryDate').value,
@@ -1327,7 +1501,7 @@
                     country: country,
                     governorate: document.getElementById('governorateSelect').value,
                     custAddr: document.getElementById('custAddr').value,
-                    custMob: phonePrefix + document.getElementById('custMob').value,
+                    custMob: phonePrefix + rawMob,
                     model: document.getElementById('modelSelect').value,
                     size: document.getElementById('size').value,
                     weight: document.getElementById('weight').value,
@@ -1341,13 +1515,15 @@
                 };
                 
                 if (!payload.model || !payload.pageName) return this.notify('يرجى اختيار الموديل والصفحة من القائمة', 'error');
+                if(rawMob.length < 8) return this.notify('رقم الموبايل غير صحيح', 'error');
                 
                 const newRef = await push(ordersRef, payload);
                 this.lastSavedOrderId = newRef.key;
                 this.logAction('create', newRef.key, `إنشاء طلب للزبون: ${payload.custName}`);
-                this.notify("تم حفظ الطلبية", "success");
+                this.notify("تم حفظ الطلبية بنجاح", "success");
                 
                 ['custName', 'custAddr', 'custMob', 'size', 'weight', 'height', 'price', 'tags'].forEach(id => document.getElementById(id).value = '');
+                document.getElementById('duplicateWarning').style.display = 'none';
                 document.getElementById('custName').focus();
                 
                 document.getElementById('printLastOrderBtn').style.display = 'block';
@@ -1388,6 +1564,9 @@
             },
 
             buildCharts(counts, revByModel, ordersByUser, priorityCounts) {
+                const textColor = this.isDarkMode ? '#e0e0e0' : '#666';
+                Chart.defaults.color = textColor;
+
                 if (this.charts.status) this.charts.status.destroy();
                 this.charts.status = new Chart(document.getElementById('statusChart'), {
                     type: 'doughnut',
@@ -1395,9 +1574,11 @@
                         labels: ['جديدة', 'تحضير', 'جاهزة', 'مسلمة', 'مؤجل', 'ملغي', 'مخزن'],
                         datasets: [{
                             data: [counts.new, counts.process, counts.done, counts.delivered, counts.postponed, counts.canceled, counts.stored],
-                            backgroundColor: ['#ffc107', '#17a2b8', '#28a745', '#273c75', '#fd7e14', '#dc3545', '#6c757d']
+                            backgroundColor: ['#ffc107', '#17a2b8', '#28a745', '#273c75', '#fd7e14', '#dc3545', '#6c757d'],
+                            borderWidth: 0
                         }]
-                    }
+                    },
+                    options: { plugins: { legend: { position: 'bottom' } }, cutout: '70%' }
                 });
 
                 if (this.charts.model) this.charts.model.destroy();
@@ -1406,8 +1587,9 @@
                     type: 'bar',
                     data: {
                         labels: topModels.map(m => m[0]),
-                        datasets: [{ label: 'الإيرادات (JOD)', data: topModels.map(m => m[1]), backgroundColor: '#099999' }]
-                    }
+                        datasets: [{ label: 'الإيرادات (JOD)', data: topModels.map(m => m[1]), backgroundColor: '#099999', borderRadius: 6 }]
+                    },
+                    options: { scales: { y: { grid: { color: this.isDarkMode?'#333':'#eee' } }, x: { grid: { display: false } } } }
                 });
 
                 if (this.charts.user) this.charts.user.destroy();
@@ -1415,8 +1597,9 @@
                     type: 'bar',
                     data: {
                         labels: Object.keys(ordersByUser),
-                        datasets: [{ label: 'عدد الطلبات', data: Object.values(ordersByUser), backgroundColor: '#17a2b8' }]
-                    }
+                        datasets: [{ label: 'عدد الطلبات', data: Object.values(ordersByUser), backgroundColor: '#17a2b8', borderRadius: 6 }]
+                    },
+                    options: { scales: { y: { grid: { color: this.isDarkMode?'#333':'#eee' } }, x: { grid: { display: false } } } }
                 });
 
                 if (this.charts.priority) this.charts.priority.destroy();
@@ -1424,17 +1607,18 @@
                     type: 'pie',
                     data: {
                         labels: ['عالية', 'متوسطة', 'عادية'],
-                        datasets: [{ data: [priorityCounts.high, priorityCounts.med, priorityCounts.low], backgroundColor: ['#d63031', '#eccc68', '#7bed9f'] }]
-                    }
+                        datasets: [{ data: [priorityCounts.high, priorityCounts.med, priorityCounts.low], backgroundColor: ['#d63031', '#eccc68', '#7bed9f'], borderWidth:0 }]
+                    },
+                    options: { plugins: { legend: { position: 'bottom' } } }
                 });
 
                 if (this.charts.funnel) this.charts.funnel.destroy();
                 this.charts.funnel = new Chart(document.getElementById('funnelChart'), {
                     type: 'bar',
-                    options: { indexAxis: 'y' },
+                    options: { indexAxis: 'y', scales: { x: { grid: { color: this.isDarkMode?'#333':'#eee' } }, y: { grid: { display: false } } } },
                     data: {
                         labels: ['جديدة', 'تحضير', 'جاهزة', 'مسلمة', 'مؤجل', 'ملغي', 'مخزن'],
-                        datasets: [{ label: 'مسار الطلبات', data: [counts.new, counts.process, counts.done, counts.delivered, counts.postponed, counts.canceled, counts.stored], backgroundColor: '#2b2d42' }]
+                        datasets: [{ label: 'مسار الطلبات', data: [counts.new, counts.process, counts.done, counts.delivered, counts.postponed, counts.canceled, counts.stored], backgroundColor: '#2b2d42', borderRadius: 4 }]
                     }
                 });
             },
@@ -1462,7 +1646,10 @@
                     
                     if (countEl) countEl.innerText = cols[status].length; 
                     if (totalEl) totalEl.innerText = sums[status] + ' JOD'; 
-                    if (container) container.innerHTML = cols[status].map(o => this.getKanbanCard(o)).join(''); 
+                    if (container) {
+                        if(cols[status].length === 0) container.innerHTML = '<div class="text-muted small p-3 w-100 text-center">لا توجد طلبات هنا</div>';
+                        else container.innerHTML = cols[status].map(o => this.getKanbanCard(o)).join(''); 
+                    }
                 }); 
                 
                 this.initSortable(); 
@@ -1472,14 +1659,21 @@
 
             getKanbanCard(o) {
                 const isChecked = this.selectedKbIds.has(o.id) ? 'checked' : '';
+                const waLink = `https://wa.me/${o.custMob.replace('+','')}?text=${encodeURIComponent('مرحباً، بخصوص طلبك من DARZA PRO...')}`;
                 return `
-                <div class="order-card ${o.status}-border position-relative bg-white p-3 rounded-3 shadow-sm" style="width: 320px; cursor: pointer; border-right-width: 6px;" onclick="app.showOrderDetails('${o.id}', ${JSON.stringify(o).replace(/"/g, '&quot;')})">
-                    <div class="form-check position-absolute top-0 end-0 m-2" onclick="event.stopPropagation()">
-                        <input class="form-check-input border-secondary" type="checkbox" onchange="app.toggleKbSelect('${o.id}')" ${isChecked} style="transform: scale(1.3); cursor: pointer;">
+                <div class="order-card ${o.status}-border" style="width: 320px;" onclick="app.showOrderDetails('${o.id}', ${JSON.stringify(o).replace(/"/g, '&quot;')})">
+                    <div class="d-flex justify-content-between mb-2">
+                        <div class="form-check" onclick="event.stopPropagation()">
+                            <input class="form-check-input border-secondary shadow-sm" type="checkbox" onchange="app.toggleKbSelect('${o.id}')" ${isChecked} style="transform: scale(1.2); cursor: pointer;">
+                        </div>
+                        <div>
+                            <i class="fas fa-copy copy-btn" title="نسخ الموبايل" onclick="event.stopPropagation(); app.copyToClipboard('${o.custMob}')"></i>
+                            <a href="${waLink}" target="_blank" class="text-success ms-1" onclick="event.stopPropagation()"><i class="fab fa-whatsapp fs-5"></i></a>
+                        </div>
                     </div>
-                    <div class="d-flex justify-content-between mt-4">
-                        <strong class="fs-6">${o.custName}</strong>
-                        <span class="fw-bold text-success">${o.price} ${o.currency || 'JOD'}</span>
+                    <div class="d-flex justify-content-between mt-2 align-items-center">
+                        <strong class="fs-6 text-truncate pe-2" style="max-width:70%;">${o.custName}</strong>
+                        <span class="fw-bold text-success" style="font-size:0.9rem">${o.price} ${o.currency || 'JOD'}</span>
                     </div>
                     <div class="text-muted small mt-2">
                         <i class="fas fa-tag"></i> ${o.model} | نمرة: ${o.size}
@@ -1487,10 +1681,10 @@
                     <div class="text-muted small mt-1 fw-bold">
                         <i class="fas fa-weight-hanging text-primary"></i> ${o.weight} kg &nbsp;|&nbsp; <i class="fas fa-ruler-vertical text-primary"></i> ${o.height} cm
                     </div>
-                    ${o.tags ? `<div class="mt-2"><span class="badge bg-light text-dark border">${o.tags}</span></div>` : ''}
-                    <div class="mt-2 pt-2 border-top small text-muted d-flex justify-content-between">
-                        <span><i class="fas fa-user"></i> ${o.entryUser}</span>
-                        <span>${o.date}</span>
+                    ${o.tags ? `<div class="mt-2"><span class="badge" style="background:rgba(9, 153, 153, 0.1); color:var(--primary)">${o.tags}</span></div>` : ''}
+                    <div class="mt-3 pt-2 border-top small text-muted d-flex justify-content-between align-items-center" style="border-color:var(--glass-border)!important">
+                        <span><i class="fas fa-user ms-1"></i>${o.entryUser}</span>
+                        <span style="font-size:0.75rem">${o.date}</span>
                     </div>
                 </div>`;
             },
@@ -1592,6 +1786,7 @@
                         ghostClass: 'card-ghost',
                         onEnd: (evt) => {
                             const id = evt.item.getAttribute('data-id');
+                            if(!id) return; // safety
                             const newStatus = evt.to.getAttribute('data-status'); 
                             const oldStatus = evt.from.getAttribute('data-status');
                             if (newStatus && oldStatus && newStatus !== oldStatus) {
@@ -1611,28 +1806,82 @@
                 const modal = new bootstrap.Modal(document.getElementById('orderDetailModal'));
                 const container = document.getElementById('modalOrderContent');
                 
-                const statusMap = { new: 'جديدة', process: 'تحضير', done: 'جاهزة', delivered: 'مسلمة', postponed: 'مؤجل', canceled: 'ملغي', stored: 'مخزن' };
                 const isReadOnly = (this.currentUserRole === 'Delivery' || this.currentUserRole === 'User') ? 'disabled' : '';
+                const waLink = `https://wa.me/${order.custMob.replace('+','')}?text=${encodeURIComponent('مرحباً، بخصوص طلبك...')}`;
+                
+                // Build Timeline if Admin
+                let timelineHTML = '';
+                if(this.currentUserRole === 'Admin' && this.logsData) {
+                    const orderLogs = Object.values(this.logsData).filter(l => l.orderId === id).sort((a,b)=>a.timestamp - b.timestamp);
+                    if(orderLogs.length > 0) {
+                        timelineHTML = `<div class="mt-4 pt-3 border-top"><h6 class="fw-bold mb-3"><i class="fas fa-history text-primary"></i> مسار الطلب</h6><div class="timeline-small">`;
+                        orderLogs.forEach(l => {
+                            timelineHTML += `<div class="timeline-item"><div class="small fw-bold">${l.action === 'status' ? 'تغيير حالة' : (l.action==='create'?'إنشاء':'تعديل')} <span class="text-muted fw-normal float-end" dir="ltr">${new Date(l.timestamp).toLocaleString('en-GB',{hour:'2-digit',minute:'2-digit', day:'2-digit', month:'2-digit'})}</span></div><div class="small text-muted">${l.details} - بواسطة ${l.user}</div></div>`;
+                        });
+                        timelineHTML += `</div></div>`;
+                    }
+                }
 
                 container.innerHTML = `
                 <form id="editForm">
                     <div class="row g-3">
-                        <div class="col-md-6"><label class="small text-muted fw-bold">الزبون</label><input class="form-control" id="modCustName" value="${order.custName}" required ${isReadOnly}></div>
-                        <div class="col-md-6"><label class="small text-muted fw-bold">الموبايل</label><input class="form-control" id="modCustMob" value="${order.custMob}" required ${isReadOnly} dir="ltr"></div>
-                        <div class="col-md-12"><label class="small text-muted fw-bold">العنوان التفصيلي</label><input class="form-control" id="modCustAddr" value="${order.custAddr}" required ${isReadOnly}></div>
-                        <div class="col-md-4"><label class="small text-muted fw-bold">الموديل</label><input class="form-control" id="modModel" value="${order.model}" required ${isReadOnly}></div>
-                        <div class="col-md-4"><label class="small text-muted fw-bold">النمرة</label><input class="form-control" id="modSize" value="${order.size}" required ${isReadOnly}></div>
-                        <div class="col-md-4"><label class="small text-muted fw-bold">سعر شامل التوصيل</label><input type="number" step="0.5" class="form-control text-success fw-bold" id="modPrice" value="${order.price}" required ${isReadOnly}></div>
-                        <div class="col-md-6"><label class="small text-muted fw-bold">الوزن (kg)</label><input type="number" step="0.1" class="form-control" id="modWeight" value="${order.weight}" required ${isReadOnly}></div>
-                        <div class="col-md-6"><label class="small text-muted fw-bold">الطول (cm)</label><input type="number" class="form-control" id="modHeight" value="${order.height}" required ${isReadOnly}></div>
-                        <div class="col-md-12"><label class="small text-muted fw-bold"> (ملاحظات)</label><input class="form-control" id="modTags" value="${order.tags || ''}" ${isReadOnly}></div>
+                        <div class="col-md-6">
+                            <label class="small text-muted fw-bold">الزبون</label>
+                            <div class="input-group">
+                                <input class="form-control" id="modCustName" value="${order.custName}" required ${isReadOnly}>
+                                <span class="input-group-text copy-btn m-0 border-start-0" onclick="app.copyToClipboard('${order.custName}')"><i class="fas fa-copy"></i></span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="small text-muted fw-bold">الموبايل</label>
+                            <div class="input-group">
+                                <input class="form-control text-end" id="modCustMob" value="${order.custMob}" required ${isReadOnly} dir="ltr">
+                                <a href="${waLink}" target="_blank" class="input-group-text bg-success text-white border-success"><i class="fab fa-whatsapp"></i></a>
+                                <span class="input-group-text copy-btn m-0" onclick="app.copyToClipboard('${order.custMob}')"><i class="fas fa-copy"></i></span>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <label class="small text-muted fw-bold">العنوان التفصيلي</label>
+                            <div class="input-group">
+                                <input class="form-control" id="modCustAddr" value="${order.custAddr}" required ${isReadOnly}>
+                                <span class="input-group-text copy-btn m-0" onclick="app.copyToClipboard('${order.country} ${order.governorate} ${order.custAddr}')"><i class="fas fa-copy"></i></span>
+                            </div>
+                        </div>
                         
-                        <div class="col-12"><hr></div>
-                        <div class="col-md-4"><strong class="small text-muted">رقم الطلب:</strong><br>${id.slice(-6)}</div>
-                        <div class="col-md-4"><strong class="small text-muted">الدولة والمحافظة:</strong><br>${order.country || '-'} / ${order.governorate || '-'}</div>
-                        <div class="col-md-4"><strong class="small text-muted">الحالة:</strong><br>${statusMap[order.status]}</div>
+                        <div class="col-md-4">
+                            <label class="small text-muted fw-bold">الموديل</label>
+                            <input class="form-control" id="modModel" value="${order.model}" required ${isReadOnly}>
+                        </div>
+                        <div class="col-md-4">
+                            <label class="small text-muted fw-bold">النمرة</label>
+                            <input class="form-control" id="modSize" value="${order.size}" required ${isReadOnly}>
+                        </div>
+                        <div class="col-md-4">
+                            <label class="small text-muted fw-bold">السعر (${order.currency||'JOD'})</label>
+                            <input type="number" step="0.5" class="form-control text-success fw-bold" id="modPrice" value="${order.price}" required ${isReadOnly}>
+                        </div>
+                        
+                        <div class="col-md-6">
+                            <label class="small text-muted fw-bold">الوزن (kg)</label>
+                            <input type="number" step="0.1" class="form-control" id="modWeight" value="${order.weight}" required ${isReadOnly}>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="small text-muted fw-bold">الطول (cm)</label>
+                            <input type="number" class="form-control" id="modHeight" value="${order.height}" required ${isReadOnly}>
+                        </div>
+                        <div class="col-md-12">
+                            <label class="small text-muted fw-bold">ملاحظات (Tags)</label>
+                            <input class="form-control" id="modTags" value="${order.tags || ''}" ${isReadOnly}>
+                        </div>
+                        
+                        <div class="col-12"><hr class="opacity-25"></div>
+                        <div class="col-md-4"><strong class="small text-muted d-block mb-1">رقم الطلب:</strong><span class="badge bg-light text-dark border">${id.slice(-8)}</span> <i class="fas fa-copy copy-btn ms-1" onclick="app.copyToClipboard('${id.slice(-8)}')"></i></div>
+                        <div class="col-md-4"><strong class="small text-muted d-block mb-1">الموقع:</strong><span class="badge bg-light text-dark border">${order.country || '-'} / ${order.governorate || '-'}</span></div>
+                        <div class="col-md-4"><strong class="small text-muted d-block mb-1">الحالة الحالية:</strong><span class="badge" style="background:var(--primary)">${statusMapAr[order.status]}</span></div>
                     </div>
-                </form>`;
+                </form>
+                ${timelineHTML}
+                `;
                 
                 document.getElementById('updateOrderBtn').style.display = isReadOnly ? 'none' : 'inline-block';
                 document.getElementById('updateOrderBtn').onclick = () => this.saveEditedOrder(id);
@@ -1691,7 +1940,7 @@
                     <tr><th>العنوان</th><td>${order.custAddr}</td></tr>
                     <tr><th>الموديل والنمرة</th><td>${order.model} - ${order.size}</td></tr>
                     <tr><th>الوزن والطول</th><td>${order.weight}kg / ${order.height}cm</td></tr>
-                    <tr><th>سعر شامل التوصيل</th><td style="font-weight:bold;">${order.price} ${order.currency || 'JOD'}</td></tr>
+                    <tr><th>سعر شامل التوصيل</th><td style="font-weight:bold; font-size:24px">${order.price} ${order.currency || 'JOD'}</td></tr>
                     <tr><th> (الملاحظات)</th><td>${order.tags || 'لا يوجد'}</td></tr>
                 </table>
                 </body></html>`);
@@ -1716,25 +1965,23 @@
                     if (usr && o.entryUser !== usr) return false;
                     if (modelF && o.model !== modelF) return false;
                     if (from || to) {
-                        const [d, m, y] = o.date.split('/');
-                        const od = new Date(`${y}-${m}-${d}`);
-                        if (from && od < new Date(from)) return false;
-                        if (to && od > new Date(to)) return false;
+                        const parts = o.date.split('/');
+                        if(parts.length === 3) {
+                            const od = new Date(`${parts[2]}-${parts[1]}-${parts[0]}`);
+                            if (from && od < new Date(from)) return false;
+                            if (to && od > new Date(to)) return false;
+                        }
                     }
                     return true;
-                });
+                }).sort((a,b) => b[1].timestamp - a[1].timestamp);
             },
 
             updateStageCards() {
                 const filtered = this.getFilteredData();
                 const totals = {
-                    new: { count: 0, sum: 0 },
-                    process: { count: 0, sum: 0 },
-                    done: { count: 0, sum: 0 },
-                    delivered: { count: 0, sum: 0 },
-                    postponed: { count: 0, sum: 0 }, 
-                    canceled: { count: 0, sum: 0 },  
-                    stored: { count: 0, sum: 0 }     
+                    new: { count: 0, sum: 0 }, process: { count: 0, sum: 0 },
+                    done: { count: 0, sum: 0 }, delivered: { count: 0, sum: 0 },
+                    postponed: { count: 0, sum: 0 }, canceled: { count: 0, sum: 0 }, stored: { count: 0, sum: 0 }     
                 };
                 
                 filtered.forEach(([_, o]) => {
@@ -1768,22 +2015,31 @@
                     stored: '<span class="badge bg-secondary">مخزن</span>'
                 };
                 
+                if(filtered.length === 0) {
+                    tbody.innerHTML = '<tr><td colspan="12" class="text-center py-5 text-muted"><i class="fas fa-inbox fa-3x mb-3 opacity-50"></i><br>لا توجد بيانات مطابقة للبحث</td></tr>';
+                    return;
+                }
+
                 tbody.innerHTML = filtered.map(([id, o]) => `
                     <tr>
-                        <td><input type="checkbox" class="form-check-input row-checkbox" value="${id}" onchange="app.updateSelection()" ${this.selectedIds.has(id)?'checked':''}></td>
-                        <td class="small fw-bold">${id.slice(-6)}</td>
+                        <td><input type="checkbox" class="form-check-input row-checkbox border-secondary" value="${id}" onchange="app.updateSelection()" ${this.selectedIds.has(id)?'checked':''}></td>
+                        <td class="small fw-bold">
+                            ${id.slice(-6)} <i class="fas fa-copy copy-btn ms-1" onclick="app.copyToClipboard('${id.slice(-8)}')"></i>
+                        </td>
                         <td class="fw-bold">${o.custName}</td>
-                        <td dir="ltr" class="text-end">${o.custMob}</td>
+                        <td dir="ltr" class="text-end">
+                            ${o.custMob} <i class="fas fa-copy copy-btn ms-1" onclick="app.copyToClipboard('${o.custMob}')"></i>
+                        </td>
                         <td>${o.model}</td>
                         <td>${o.weight}</td>
                         <td>${o.height}</td>
                         <td class="text-success fw-bold">${o.price} ${o.currency || 'JOD'}</td>
                         <td>${sBadges[o.status]}</td>
                         <td class="small text-muted">${o.entryUser}</td>
-                        <td class="small">${o.date}</td>
+                        <td class="small" dir="ltr" style="text-align:right">${o.date}</td>
                         <td class="text-center">
-                            <button class="btn btn-sm btn-outline-info" onclick="app.showOrderDetails('${id}', ${JSON.stringify(o).replace(/"/g, '&quot;')})"><i class="fas fa-eye"></i></button> 
-                            ${isAdmin ? `<button class="btn btn-sm btn-outline-danger ms-1" onclick="app.deleteOrder('${id}')"><i class="fas fa-trash"></i></button>` : ''}
+                            <button class="btn btn-sm btn-outline-info rounded-circle" onclick="app.showOrderDetails('${id}', ${JSON.stringify(o).replace(/"/g, '&quot;')})"><i class="fas fa-eye"></i></button> 
+                            ${isAdmin ? `<button class="btn btn-sm btn-outline-danger ms-1 rounded-circle" onclick="app.deleteOrder('${id}')"><i class="fas fa-trash"></i></button>` : ''}
                         </td>
                     </tr>
                 `).join('');
@@ -1813,10 +2069,10 @@
                         <td>${o.size}</td>
                         <td>${o.weight} kg</td>
                         <td>${o.height} cm</td>
-                        <td><span class="badge bg-light text-dark border">1</span></td>
+                        <td><span class="badge text-dark border" style="background:var(--bg-color)">1</span></td>
                         <td id="inv-status-${id}">${sBadges[o.status]}</td>
                         <td class="text-center">
-                            <select class="form-select form-select-sm d-inline-block w-auto" onchange="app.moveOrderStage('${id}', this.value)">
+                            <select class="form-select form-select-sm d-inline-block w-auto" style="border-radius:20px" onchange="app.moveOrderStage('${id}', this.value)">
                                 <option value="" disabled selected>تغيير الحالة</option>
                                 <option value="new">جديدة</option>
                                 <option value="process">تحضير</option>
@@ -1916,8 +2172,8 @@
                     'الطول': o.height,
                     'السعر الشامل': o.price,
                     'العملة': o.currency,
-                    'الحالة': o.status,
-                    ' (ملاحظات)': o.tags,
+                    'الحالة': statusMapAr[o.status],
+                    'ملاحظات': o.tags,
                     'المدخل': o.entryUser,
                     'التاريخ': o.date
                 }));
@@ -1936,7 +2192,7 @@
                     <tr>
                         <td dir="ltr" class="text-end small">${new Date(l.timestamp).toLocaleString('en-GB')}</td>
                         <td class="fw-bold">${l.user}</td>
-                        <td><span class="badge bg-light text-dark border">${l.action}</span></td>
+                        <td><span class="badge text-dark border" style="background:var(--bg-color)">${l.action}</span></td>
                         <td class="small text-muted">${l.orderId}</td>
                         <td>${l.details}</td>
                     </tr>
