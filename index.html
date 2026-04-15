@@ -9,7 +9,16 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Almarai:wght@300;400;700;800&display=swap" rel="stylesheet">
+/* هذا الكود يعطي مساحة من الأعلى للقائمة التي تحوي الطلبات حتى لا يختفي الطلب الأول */
+.board-column, .orders-container, .list-group {
+    padding-top: 15px !important;
+    margin-top: 10px;
+}
 
+/* لضمان أن أول كرت (طلب) يملك مساحة من الأعلى */
+.order-card:first-child {
+    margin-top: 10px !important; 
+}
     <style>
         :root {
             --primary: #099999;
@@ -656,13 +665,15 @@
                         
                         <div class="col-12"><hr class="text-muted opacity-25"></div>
                         
-                        <div class="col-md-4">
-                            <div class="form-floating">
-                                <input type="text" id="custName" class="form-control" required placeholder="الاسم الرباعي">
-                                <label for="custName" class="fw-bold">اسم الزبون <span class="text-danger">*</span></label>
-                            </div>
-                        </div>
-                        
+<div class="col-md-6"> <label class="form-label fw-bold">اسم الزبون <span class="text-danger">*</span></label>
+    <input type="text" 
+           id="customerName" 
+           class="form-control fw-bold fs-5" 
+           required 
+           placeholder="الاسم الأول والثاني" 
+           pattern="^([\u0600-\u06FFa-zA-Z]{3,}\s+)+[\u0600-\u06FFa-zA-Z]{3,}\s*$" 
+           title="يجب إدخال اسم من مقطعين على الأقل، وكل مقطع يتكون من 3 أحرف على الأقل">
+</div>                        
                         <div class="col-md-4">
                             <div class="form-floating">
                                 <select id="countrySelect" class="form-select" required onchange="app.updateCountry()">
@@ -680,13 +691,16 @@
                             </div>
                         </div>
 
-                        <div class="col-md-6">
-                            <div class="form-floating">
-                                <input type="text" id="custAddr" class="form-control" required placeholder="المنطقة - الشارع - المعلم">
-                                <label for="custAddr" class="fw-bold">العنوان التفصيلي <span class="text-danger">*</span></label>
-                            </div>
-                        </div>
-                        
+<div class="col-md-12">
+    <label class="form-label fw-bold">العنوان التفصيلي <span class="text-danger">*</span></label>
+    <input type="text" 
+           id="address" 
+           class="form-control fw-bold fs-5" 
+           required 
+           placeholder="المدينة، الحي، الشارع..." 
+           pattern="^(\S+\s+)+\S+\s*$" 
+           title="العنوان يجب أن يحتوي على كلمتين (مقطعين) على الأقل">
+</div>                        
                         <div class="col-md-6">
                             <label class="form-label fw-bold">الموبايل <span class="text-danger">*</span></label>
                             <div class="input-group">
@@ -1906,23 +1920,40 @@ toggleKbSelect(id) {
                                 <span class="input-group-text copy-btn m-0" onclick="app.copyToClipboard('${order.custMob}')"><i class="fas fa-copy"></i></span>
                             </div>
                         </div>
-                        <div class="col-md-12">
-                            <label class="small text-muted fw-bold">العنوان التفصيلي</label>
-                            <div class="input-group">
-                                <input class="form-control" id="modCustAddr" value="${order.custAddr}" required ${isReadOnly}>
-                                <span class="input-group-text copy-btn m-0" onclick="app.copyToClipboard('${order.country} ${order.governorate} ${order.custAddr}')"><i class="fas fa-copy"></i></span>
-                            </div>
-                        </div>
-                        
+<div class="col-md-4">
+    <label class="form-label fw-bold" style="width: 100%; text-align: right;">رقم الموبايل <span class="text-danger">*</span></label>
+    <div class="input-group" dir="ltr">
+        <select id="countryCode" class="form-select fw-bold text-center" style="max-width: 100px; background:var(--bg-color)">
+            <option value="+962">+962</option>
+            <option value="+970">+970</option>
+        </select>
+        <input type="tel" 
+               id="mobile" 
+               class="form-control fw-bold fs-5 text-end" 
+               required 
+               placeholder="xxxxxxxxx" 
+               minlength="9" 
+               maxlength="9" 
+               pattern="[0-9]{9}" 
+               title="رقم الموبايل يجب أن يتكون من 9 أرقام بالضبط"
+               oninput="this.value = this.value.replace(/[^0-9]/g, '');">
+    </div>
+</div>                        
                         <div class="col-md-4">
                             <label class="small text-muted fw-bold">الموديل</label>
                             <input class="form-control" id="modModel" value="${order.model}" required ${isReadOnly}>
                         </div>
-                        <div class="col-md-4">
-                            <label class="small text-muted fw-bold">النمرة</label>
-                            <input class="form-control" id="modSize" value="${order.size}" required ${isReadOnly}>
-                        </div>
-                        <div class="col-md-4">
+<div class="col-md-4">
+    <label class="form-label fw-bold">النمرة <span class="text-danger">*</span></label>
+    <input type="number" 
+           id="shoeSize" 
+           class="form-control fw-bold fs-5" 
+           required 
+           placeholder="مثال: 42" 
+           min="21" 
+           max="49" 
+           title="النمرة يجب أن تكون رقماً بين 21 و 49">
+</div>                        <div class="col-md-4">
                             <label class="small text-muted fw-bold">السعر (${order.currency||'JOD'})</label>
                             <input type="number" step="0.5" class="form-control text-success fw-bold" id="modPrice" value="${order.price}" required ${isReadOnly}>
                         </div>
