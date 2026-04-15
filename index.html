@@ -1714,9 +1714,12 @@
 
             filterKanban() { this.renderKanban(); }, 
 
-            getKanbanCard(o) {
+/* --- استبدل الدالة القديمة بهذا الكود المحمي من أخطاء الـ Syntax --- */
+
+getKanbanCard(o) {
     const isChecked = this.selectedKbIds.has(o.id) ? 'checked' : '';
     const waLink = `https://wa.me/${o.custMob.replace('+','')}?text=${encodeURIComponent('مرحباً ' + o.custName)}`;
+    
     return `
     <div class="order-card ${o.status}-border shadow-sm p-3" data-id="${o.id}" onclick="app.showOrderDetails('${o.id}', ${JSON.stringify(o).replace(/"/g, '&quot;')})">
         <div class="d-flex justify-content-between align-items-start mb-2">
@@ -1743,8 +1746,13 @@
             </div>
         </div>
     </div>`;
-}
+}, // <--- تأكد من وجود هذه الفاصلة والقوس هنا
 
+toggleKbSelect(id) {
+    if (this.selectedKbIds.has(id)) this.selectedKbIds.delete(id);
+    else this.selectedKbIds.add(id);
+    this.updateKbBulkPanel();
+},
             toggleKbSelect(id) {
                 if (this.selectedKbIds.has(id)) this.selectedKbIds.delete(id);
                 else this.selectedKbIds.add(id);
