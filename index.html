@@ -166,14 +166,28 @@
         .copy-btn:hover { color: var(--primary); background: rgba(9, 153, 153, 0.1); }
 
         /* Kanban Board Enhancements */
-        .kanban-board {
-           .accordion-body .d-flex.flex-wrap {
+.kanban-board .accordion-body .d-flex.flex-wrap {
     display: grid !important;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* يوزع البطاقات تلقائياً حسب عرض الشاشة */
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); 
     gap: 1.5rem;
     padding: 1rem;
 }
 
+.kanban-board .order-card {
+    width: 100% !important; 
+    margin-bottom: 0;  
+    border-right: none;
+    border-top: 5px solid #ddd; 
+}
+
+/* ألوان التمييز العلوي للبطاقات داخل البورد */
+.kanban-board .new-border { border-top-color: var(--status-new); }
+.kanban-board .process-border { border-top-color: var(--status-process); }
+.kanban-board .done-border { border-top-color: var(--status-done); }
+.kanban-board .delivered-border { border-top-color: var(--status-delivered); }
+.kanban-board .postponed-border { border-top-color: var(--status-postponed); }
+.kanban-board .canceled-border { border-top-color: var(--status-canceled); }
+.kanban-board .stored-border { border-top-color: var(--status-stored); }
 .order-card {
     width: 100% !important; /* البطاقة تأخذ عرض الخلية في الشبكة */
     margin-bottom: 0; 
