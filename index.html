@@ -9,8 +9,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Almarai:wght@300;400;700;800&display=swap" rel="stylesheet">
+
     <style>
-        
         :root {
             --primary: #099999;
             --primary-dark: #067070;
@@ -166,43 +166,43 @@
         .copy-btn:hover { color: var(--primary); background: rgba(9, 153, 153, 0.1); }
 
         /* Kanban Board Enhancements */
-.kanban-board .accordion-body .d-flex.flex-wrap {
-    display: grid !important;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); 
-    gap: 1.5rem;
-    padding: 1rem;
-}
+        .kanban-board .accordion-body .d-flex.flex-wrap {
+            display: grid !important;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); 
+            gap: 1.5rem;
+            padding: 1rem;
+        }
 
-.kanban-board .order-card {
-    width: 100% !important; 
-    margin-bottom: 0;  
-    border-right: none;
-    border-top: 5px solid #ddd; 
-}
+        .kanban-board .order-card {
+            width: 100% !important; 
+            margin-bottom: 0;  
+            border-right: none;
+            border-top: 5px solid #ddd; 
+        }
 
-/* ألوان التمييز العلوي للبطاقات داخل البورد */
-.kanban-board .new-border { border-top-color: var(--status-new); }
-.kanban-board .process-border { border-top-color: var(--status-process); }
-.kanban-board .done-border { border-top-color: var(--status-done); }
-.kanban-board .delivered-border { border-top-color: var(--status-delivered); }
-.kanban-board .postponed-border { border-top-color: var(--status-postponed); }
-.kanban-board .canceled-border { border-top-color: var(--status-canceled); }
-.kanban-board .stored-border { border-top-color: var(--status-stored); }
-.order-card {
-    width: 100% !important; /* البطاقة تأخذ عرض الخلية في الشبكة */
-    margin-bottom: 0; 
-    border-right: none;
-    border-top: 5px solid #ddd; /* تمييز الحالة من الأعلى بدلاً من الجنب */
-}
+        /* ألوان التمييز العلوي للبطاقات داخل البورد */
+        .kanban-board .new-border { border-top-color: var(--status-new); }
+        .kanban-board .process-border { border-top-color: var(--status-process); }
+        .kanban-board .done-border { border-top-color: var(--status-done); }
+        .kanban-board .delivered-border { border-top-color: var(--status-delivered); }
+        .kanban-board .postponed-border { border-top-color: var(--status-postponed); }
+        .kanban-board .canceled-border { border-top-color: var(--status-canceled); }
+        .kanban-board .stored-border { border-top-color: var(--status-stored); }
+        .order-card {
+            width: 100% !important; /* البطاقة تأخذ عرض الخلية في الشبكة */
+            margin-bottom: 0; 
+            border-right: none;
+            border-top: 5px solid #ddd; /* تمييز الحالة من الأعلى بدلاً من الجنب */
+        }
 
-/* ألوان التمييز العلوي للبطاقات */
-.new-border { border-top-color: var(--status-new); }
-.process-border { border-top-color: var(--status-process); }
-.done-border { border-top-color: var(--status-done); }
-.delivered-border { border-top-color: var(--status-delivered); }
-.postponed-border { border-top-color: var(--status-postponed); }
-.canceled-border { border-top-color: var(--status-canceled); }
-.stored-border { border-top-color: var(--status-stored); }
+        /* ألوان التمييز العلوي للبطاقات */
+        .new-border { border-top-color: var(--status-new); }
+        .process-border { border-top-color: var(--status-process); }
+        .done-border { border-top-color: var(--status-done); }
+        .delivered-border { border-top-color: var(--status-delivered); }
+        .postponed-border { border-top-color: var(--status-postponed); }
+        .canceled-border { border-top-color: var(--status-canceled); }
+        .stored-border { border-top-color: var(--status-stored); }
         
 
         .accordion-item {
@@ -397,106 +397,117 @@
         .mobile-bottom-nav { display: none; }
 
         @media (max-width: 991px) {
-    /* تنسيق جسم الصفحة للموبايل */
-    body { 
-        overscroll-behavior-y: contain; /* تم تعديلها لتعطيل الـ Refresh بالسحب */
-        -webkit-tap-highlight-color: transparent; 
-        padding-bottom: 85px; 
-        user-select: none; /* إضافة: تمنع ظهور قائمة النسخ واللصق عند الضغط المطول بالخطأ */
-    }
-
-    /* السماح للمستخدم بتحديد النصوص داخل خانات الإدخال فقط */
-    input, textarea { user-select: text; }
-
-    /* تأثيرات الأزرار السفلية */
-    .bottom-nav-link:active i {
-        transform: scale(0.85);
-        transition: 0.1s;
-    }
-
-    /* توهج الأيقونة النشطة */
-    .bottom-nav-link.active i {
-        filter: drop-shadow(0 0 5px rgba(9, 153, 153, 0.6));
-    }
-}
-            
-            .navbar { padding: 0.8rem 0; margin-bottom: 1rem; position: sticky; top: 0; z-index: 1040; }
-            .navbar-toggler { display: none !important; }
-            .navbar-collapse { display: flex !important; flex-basis: auto !important; }
-            .navbar-collapse .nav-pills { display: none !important; }
-            .navbar .border-start { border: none !important; margin: 0 !important; padding: 0 !important; }
-            #currentUserDisplay { display: none !important; } 
-            #userRoleBadge { margin-top: 0 !important; }
-            
-            /* Bottom Navigation Bar */
-            .mobile-bottom-nav {
-                display: flex;
-                position: fixed;
-                bottom: 0;
-                left: 0;
-                width: 100%;
-                background: var(--glass-bg);
-                backdrop-filter: blur(15px);
-                -webkit-backdrop-filter: blur(15px);
-                box-shadow: 0 -5px 15px rgba(0,0,0,0.1);
-                padding: 0.5rem 0;
-                padding-bottom: env(safe-area-inset-bottom, 0.5rem);
-                z-index: 1050;
-                overflow-x: auto;
-                white-space: nowrap;
-                justify-content: flex-start;
-                border-top: 1px solid var(--glass-border);
+            body { 
+                overscroll-behavior-y: contain; 
+                -webkit-tap-highlight-color: transparent; 
+                padding-bottom: 85px; 
+                user-select: none; 
             }
-            .bottom-nav-link {
-                background: none;
-                border: none;
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                color: var(--text-light);
-                font-size: 0.75rem;
-                font-weight: bold;
-                padding: 0.5rem 0.2rem;
-                flex: 1 0 auto;
-                min-width: 75px;
-                transition: var(--transition);
-                position: relative;
-                overflow: hidden;
-            }
-            /* Ripple effect hack */
-            .bottom-nav-link:active { background: rgba(9, 153, 153, 0.1); border-radius: 12px; }
-            .bottom-nav-link i { font-size: 1.3rem; margin-bottom: 5px; }
-            .bottom-nav-link.active { color: var(--primary); transform: translateY(-2px); }
-            .bottom-nav-link.active i { color: var(--primary); }
-
-            /* Bottom Sheet Modal */
-            .modal-dialog { margin: auto 0 0 0; align-items: flex-end; min-height: 100%; }
-            .modal-content { border-radius: 24px 24px 0 0; max-height: 90vh; background: var(--card-bg); }
+            input, textarea { user-select: text; }
+            .bottom-nav-link:active i { transform: scale(0.85); transition: 0.1s; }
+            .bottom-nav-link.active i { filter: drop-shadow(0 0 5px rgba(9, 153, 153, 0.6)); }
+        }
             
-            .form-control, .form-select { font-size: 16px; } /* prevent zoom */
+        .navbar { padding: 0.8rem 0; margin-bottom: 1rem; position: sticky; top: 0; z-index: 1040; }
+        .navbar-toggler { display: none !important; }
+        .navbar-collapse { display: flex !important; flex-basis: auto !important; }
+        .navbar-collapse .nav-pills { display: none !important; }
+        .navbar .border-start { border: none !important; margin: 0 !important; padding: 0 !important; }
+        #currentUserDisplay { display: none !important; } 
+        #userRoleBadge { margin-top: 0 !important; }
+        
+        /* Bottom Navigation Bar */
+        .mobile-bottom-nav {
+            display: flex;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: var(--glass-bg);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            box-shadow: 0 -5px 15px rgba(0,0,0,0.1);
+            padding: 0.5rem 0;
+            padding-bottom: env(safe-area-inset-bottom, 0.5rem);
+            z-index: 1050;
+            overflow-x: auto;
+            white-space: nowrap;
+            justify-content: flex-start;
+            border-top: 1px solid var(--glass-border);
         }
-
-        /* Timeline in modal */
-        .timeline-small {
-            border-right: 2px solid var(--primary);
-            padding-right: 15px;
-            margin-right: 10px;
-        }
-        .timeline-item {
+        .bottom-nav-link {
+            background: none;
+            border: none;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: var(--text-light);
+            font-size: 0.75rem;
+            font-weight: bold;
+            padding: 0.5rem 0.2rem;
+            flex: 1 0 auto;
+            min-width: 75px;
+            transition: var(--transition);
             position: relative;
-            margin-bottom: 15px;
+            overflow: hidden;
         }
+        .bottom-nav-link:active { background: rgba(9, 153, 153, 0.1); border-radius: 12px; }
+        .bottom-nav-link i { font-size: 1.3rem; margin-bottom: 5px; }
+        .bottom-nav-link.active { color: var(--primary); transform: translateY(-2px); }
+        .bottom-nav-link.active i { color: var(--primary); }
+
+        .modal-dialog { margin: auto 0 0 0; align-items: flex-end; min-height: 100%; }
+        .modal-content { border-radius: 24px 24px 0 0; max-height: 90vh; background: var(--card-bg); }
+        
+        .form-control, .form-select { font-size: 16px; } 
+
+        .timeline-small { border-right: 2px solid var(--primary); padding-right: 15px; margin-right: 10px; }
+        .timeline-item { position: relative; margin-bottom: 15px; }
         .timeline-item::before {
-            content: '';
-            position: absolute;
-            right: -21px;
-            top: 5px;
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            background: var(--primary);
-            border: 2px solid var(--card-bg);
+            content: ''; position: absolute; right: -21px; top: 5px; width: 10px; height: 10px;
+            border-radius: 50%; background: var(--primary); border: 2px solid var(--card-bg);
         }
+
+        /* --- تصميم الـ Wizard الاحترافي مدمج هنا --- */
+        .wizard-container {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            border-radius: 24px;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.05), inset 0 0 0 1px rgba(255, 255, 255, 0.5);
+            padding: 3rem;
+            position: relative;
+            overflow: hidden;
+        }
+        [data-bs-theme="dark"] .wizard-container {
+            background: rgba(30, 33, 38, 0.85);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .step-indicator { display: flex; justify-content: space-between; margin-bottom: 3rem; position: relative; padding: 0 15px; }
+        .step-indicator::before { content: ''; position: absolute; top: 50%; left: 25px; right: 25px; height: 4px; background: #e2e8f0; z-index: 1; transform: translateY(-50%); border-radius: 4px; }
+        [data-bs-theme="dark"] .step-indicator::before { background: #333; }
+        
+        .step-progress-line { position: absolute; top: 50%; right: 25px; height: 4px; background: linear-gradient(90deg, #11cdef, var(--primary)); z-index: 2; transform: translateY(-50%); border-radius: 4px; transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1); width: 0%; }
+        
+        .step-dot { width: 45px; height: 45px; background: white; color: #a0aec0; border: 3px solid #e2e8f0; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 1.2rem; z-index: 3; transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1); position: relative; }
+        [data-bs-theme="dark"] .step-dot { background: #1e2126; border-color: #333; }
+        
+        .step-dot.active { border-color: var(--primary); color: var(--primary); box-shadow: 0 0 20px rgba(9, 153, 153, 0.3); transform: scale(1.1); }
+        .step-dot.completed { background: linear-gradient(135deg, var(--primary), #11cdef); border-color: transparent; color: white; box-shadow: 0 5px 15px rgba(9, 153, 153, 0.4); }
+
+        .step-content { display: none; opacity: 0; transform: translateX(30px); transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
+        .step-content.active { display: flex; opacity: 1; transform: translateX(0); }
+
+        .btn-nav { border-radius: 16px; padding: 0.8rem 2rem; font-weight: 700; letter-spacing: 0.5px; transition: all 0.3s ease; }
+        .btn-next { background: linear-gradient(135deg, var(--primary) 0%, #067070 100%); color: white; box-shadow: 0 10px 20px rgba(9, 153, 153, 0.2); border: none; }
+        .btn-next:hover { transform: translateY(-3px); box-shadow: 0 15px 25px rgba(9, 153, 153, 0.3); color: white; }
+        .btn-prev { background: white; color: #4a5568; border: 2px solid #e2e8f0; }
+        [data-bs-theme="dark"] .btn-prev { background: #1e2126; color: #adb5bd; border-color: #333; }
+        .btn-prev:hover { background: #f8fafc; border-color: #cbd5e0; transform: translateY(-2px); }
+        [data-bs-theme="dark"] .btn-prev:hover { background: #2b2d42; border-color: #444; }
+
     </style>
 </head>
 
@@ -636,143 +647,129 @@
             </div>
 
             <div id="tab-entry" class="tab-content" style="display:none;">
-                <div class="card p-5 mx-auto shadow-lg" style="max-width: 900px; border-radius: 20px;">
+                <div class="wizard-container mx-auto mt-3" style="max-width: 900px;">
+                    
                     <div class="text-center mb-5">
-                        <h3 class="fw-bold" style="color: var(--primary);">إضافة طلبية جديدة</h3>
-                        <p class="text-muted">الرجاء تعبئة كافة الحقول بدقة</p>
+                        <h3 class="fw-bold" style="color: var(--primary);">إدخال طلبية جديدة</h3>
+                        <p class="text-muted">نظام إدخال الطلبات السريع والذكي</p>
                         <p class="small text-muted mb-0"><i class="fas fa-keyboard"></i> تلميح: استخدم <kbd>Alt</kbd> + <kbd>N</kbd> لفتح هذه الشاشة من أي مكان</p>
                     </div>
-                    <form id="orderForm" class="row g-4">
-                        <div class="col-md-6">
-                            <label class="form-label text-muted fw-bold small"><i class="fas fa-user text-primary"></i> المدخل الحالي</label>
-                            <select id="entryUserSelect" class="form-select fw-bold text-primary border-0" style="background:var(--bg-color)" required>
-                                <option value="">جاري التحميل...</option>
-                            </select>
-                        </div>
-                        <div class="col-md-6">
-                            <label class="form-label text-muted fw-bold small"><i class="fas fa-calendar text-primary"></i> تاريخ الإدخال</label>
-                            <input type="text" id="entryDate" class="form-control border-0 fw-bold" style="background:var(--bg-color)" readonly>
-                        </div>
-                        
-                        <div class="col-12"><hr class="text-muted opacity-25"></div>
-                        
-<div class="col-md-6">
-    <label class="form-label fw-bold">اسم الزبون <span class="text-danger">*</span></label>
-    <input type="text" 
-           id="custName" 
-           class="form-control fw-bold fs-5" 
-           required 
-           placeholder="الاسم الأول والثاني" 
-           pattern="^([\u0600-\u06FFa-zA-Z]{3,}\s+)+[\u0600-\u06FFa-zA-Z]{3,}\s*$" 
-           title="يجب إدخال اسم من مقطعين على الأقل، وكل مقطع يتكون من 3 أحرف على الأقل">
-</div>
-                        <div class="col-md-4">
-                            <div class="form-floating">
+
+                    <div class="step-indicator">
+                        <div class="step-progress-line" id="progress-line"></div>
+                        <div class="step-dot active" id="dot-1"><i class="fas fa-user"></i></div>
+                        <div class="step-dot" id="dot-2"><i class="fas fa-box-open"></i></div>
+                        <div class="step-dot" id="dot-3"><i class="fas fa-check-circle"></i></div>
+                    </div>
+
+                    <form id="orderForm">
+                        <div id="step-1" class="step-content active row g-4 w-100 m-0">
+                            <h5 class="fw-bold text-primary mb-3"><i class="fas fa-id-card me-2"></i> بيانات العميل الأساسية</h5>
+                            
+                            <div class="col-md-8">
+                                <label class="form-label fw-bold">اسم الزبون <span class="text-danger">*</span></label>
+                                <input type="text" id="custName" class="form-control" required placeholder="الاسم الرباعي">
+                            </div>
+                            
+                            <div class="col-md-4">
+                                <label class="form-label fw-bold">الموبايل <span class="text-danger">*</span></label>
+                                <div class="input-group">
+                                    <span class="input-group-text fw-bold" style="background:var(--bg-color)" id="phonePrefix" dir="ltr">+962</span>
+                                    <input type="text" id="custMob" class="form-control" placeholder="مثال: 79 123 4567" required dir="ltr">
+                                </div>
+                                <div id="duplicateWarning" class="alert alert-warning mt-2 py-2 small shadow-sm rounded-3" style="display:none; border-right: 4px solid #ffc107;">
+                                    <i class="fas fa-exclamation-triangle me-1"></i> <span id="dupMsg"></span>
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-4">
+                                <label class="form-label fw-bold">الدولة <span class="text-danger">*</span></label>
                                 <select id="countrySelect" class="form-select" required onchange="app.updateCountry()">
                                     <option value="Jordan" selected>الأردن</option>
                                     <option value="Palestine">فلسطين</option>
                                 </select>
-                                <label for="countrySelect" class="fw-bold">الدولة <span class="text-danger">*</span></label>
                             </div>
-                        </div>
-                        
-                        <div class="col-md-4">
-                            <div class="form-floating">
+                            
+                            <div class="col-md-4">
+                                <label class="form-label fw-bold">المحافظة <span class="text-danger">*</span></label>
                                 <select id="governorateSelect" class="form-select" required></select>
-                                <label for="governorateSelect" class="fw-bold">المحافظة <span class="text-danger">*</span></label>
+                            </div>
+                            
+                            <div class="col-md-4">
+                                <label class="form-label fw-bold">العنوان التفصيلي <span class="text-danger">*</span></label>
+                                <input type="text" id="custAddr" class="form-control" required placeholder="المنطقة - الشارع">
+                            </div>
+                            
+                            <div class="col-12 mt-5 text-start">
+                                <button type="button" class="btn btn-nav btn-next" onclick="app.changeStep(1)">التفاصيل الفنية <i class="fas fa-arrow-left ms-2"></i></button>
                             </div>
                         </div>
 
-<div class="col-md-12">
-    <label class="form-label fw-bold">العنوان التفصيلي <span class="text-danger">*</span></label>
-    <input type="text" 
-           id="custAddr" 
-           class="form-control fw-bold fs-5" 
-           required 
-           placeholder="المدينة، الحي، الشارع..." 
-           pattern="^(\S+\s+)+\S+\s*$" 
-           title="العنوان يجب أن يحتوي على كلمتين (مقطعين) على الأقل">
-</div>
-<div class="col-md-6">
-    <label class="form-label fw-bold" style="width: 100%; text-align: right;">الموبايل <span class="text-danger">*</span></label>
-    <div class="input-group" dir="ltr">
-        <span class="input-group-text fw-bold text-center" style="background:var(--bg-color); min-width: 70px;" id="phonePrefix">+962</span>
-        <input type="tel" 
-               id="custMob" 
-               class="form-control fw-bold fs-5 text-end" 
-               required 
-               placeholder="xxxxxxxxx" 
-               minlength="9" 
-               maxlength="9" 
-               pattern="[0-9]{9}" 
-               title="رقم الموبايل يجب أن يتكون من 9 أرقام بالضبط"
-               oninput="this.value = this.value.replace(/[^0-9]/g, '');">
-    </div>
-    <div id="duplicateWarning" class="alert alert-warning mt-2 py-2 small shadow-sm rounded-3" style="display:none; border-right: 4px solid #ffc107;" dir="rtl">
-        <i class="fas fa-exclamation-triangle me-1"></i> <span id="dupMsg"></span>
-    </div>
-</div>
-                        <div class="col-md-3">
-                            <div class="form-floating">
+                        <div id="step-2" class="step-content row g-4 w-100 m-0">
+                            <h5 class="fw-bold text-primary mb-3"><i class="fas fa-tags me-2"></i> مواصفات الموديل والتسعير</h5>
+                            
+                            <div class="col-md-6">
+                                <label class="form-label fw-bold">الموديل <span class="text-danger">*</span></label>
                                 <select id="modelSelect" class="form-select" required><option value="">اختر الموديل</option></select>
-                                <label for="modelSelect" class="fw-bold">الموديل <span class="text-danger">*</span></label>
                             </div>
-                        </div>
-<div class="col-md-2">
-    <div class="form-floating">
-        <input type="number" 
-               id="size" 
-               class="form-control" 
-               required 
-               placeholder="النمرة" 
-               min="21" 
-               max="49" 
-               title="النمرة يجب أن تكون رقماً بين 21 و 49">
-        <label for="size" class="fw-bold">النمرة <span class="text-danger">*</span></label>
-    </div>
-</div>
-                        <div class="col-md-2">
-                            <div class="form-floating">
+                            <div class="col-md-6">
+                                <label class="form-label fw-bold">النمرة <span class="text-danger">*</span></label>
+                                <input type="text" id="size" class="form-control" required placeholder="مثال: L, XL, 42">
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label fw-bold">الوزن <small class="text-muted">(kg)</small> <span class="text-danger">*</span></label>
                                 <input type="number" step="0.1" id="weight" class="form-control" required placeholder="الوزن">
-                                <label for="weight" class="fw-bold">الوزن (kg) <span class="text-danger">*</span></label>
                             </div>
-                        </div>
-                        <div class="col-md-2">
-                            <div class="form-floating">
+                            <div class="col-md-4">
+                                <label class="form-label fw-bold">الطول <small class="text-muted">(cm)</small> <span class="text-danger">*</span></label>
                                 <input type="number" id="height" class="form-control" required placeholder="الطول">
-                                <label for="height" class="fw-bold">الطول (cm) <span class="text-danger">*</span></label>
                             </div>
-                        </div>
-                        
-                        <div class="col-md-3">
-                            <label class="form-label fw-bold">سعر شامل التوصيل <span class="text-danger">*</span></label>
-                            <div class="input-group">
-                                <input type="number" step="0.5" id="price" class="form-control fw-bold text-success" required>
-                                <span class="input-group-text bg-success text-white border-success" id="currencyLabel">JOD</span>
+                            <div class="col-md-4">
+                                <label class="form-label fw-bold">السعر (شامل التوصيل) <span class="text-danger">*</span></label>
+                                <div class="input-group">
+                                    <input type="number" step="0.5" id="price" class="form-control fw-bold text-success fs-5" required>
+                                    <span class="input-group-text bg-success text-white border-success" id="currencyLabel">JOD</span>
+                                </div>
+                            </div>
+
+                            <div class="col-12 mt-5 d-flex justify-content-between">
+                                <button type="button" class="btn btn-nav btn-prev" onclick="app.changeStep(-1)"><i class="fas fa-arrow-right me-2"></i> رجوع</button>
+                                <button type="button" class="btn btn-nav btn-next" onclick="app.changeStep(1)">الاعتماد النهائي <i class="fas fa-arrow-left ms-2"></i></button>
                             </div>
                         </div>
 
-                        <div class="col-md-6">
-                            <div class="form-floating">
+                        <div id="step-3" class="step-content row g-4 w-100 m-0">
+                            <h5 class="fw-bold text-primary mb-3"><i class="fas fa-satellite-dish me-2"></i> مصادر الطلب والملاحظات</h5>
+                            
+                            <div class="col-md-6">
+                                <label class="form-label text-muted fw-bold small"><i class="fas fa-user text-primary"></i> المدخل الحالي</label>
+                                <select id="entryUserSelect" class="form-select bg-light fw-bold text-primary border-0" required></select>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label text-muted fw-bold small"><i class="fas fa-calendar text-primary"></i> تاريخ الإدخال</label>
+                                <input type="text" id="entryDate" class="form-control bg-light border-0 fw-bold" readonly>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label fw-bold">اسم الصفحة (المصدر) <span class="text-danger">*</span></label>
                                 <select id="pageNameSelect" class="form-select" required><option value="">اختر الصفحة</option></select>
-                                <label for="pageNameSelect" class="fw-bold">اسم الصفحة (المصدر) <span class="text-danger">*</span></label>
                             </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-floating">
+                            <div class="col-md-6">
+                                <label class="form-label fw-bold">ملاحظات (Tags)</label>
                                 <input type="text" id="tags" class="form-control" placeholder="مثال: vip, هدية, توصيل مجاني">
-                                <label for="tags" class="fw-bold">ملاحظات (Tags)</label>
                             </div>
-                        </div>
-                        
-                        <div class="col-12 mt-5">
-                            <button type="submit" class="btn btn-main w-100 py-3 fs-5 rounded-pill"><i class="fas fa-save me-2"></i> حفظ واعتماد الطلب</button>
-                            <button type="button" id="printLastOrderBtn" class="btn btn-outline-info w-100 py-2 fs-6 rounded-pill mt-3 fw-bold" style="display:none;" onclick="app.printLastOrder()"><i class="fas fa-print me-2"></i> طباعة الطلب الأخير</button>
+                            
+                            <div class="col-12 mt-5 d-flex justify-content-between align-items-center">
+                                <button type="button" class="btn btn-nav btn-prev" onclick="app.changeStep(-1)"><i class="fas fa-arrow-right me-2"></i> رجوع</button>
+                                <button type="submit" class="btn btn-nav btn-next px-5" style="background: linear-gradient(135deg, #28a745 0%, #20c997 100%);"><i class="fas fa-save me-2"></i> حفظ واعتماد الطلب</button>
+                            </div>
+
+                            <div class="col-12 mt-3">
+                                <button type="button" id="printLastOrderBtn" class="btn btn-outline-info w-100 py-3 fs-6 rounded-pill fw-bold shadow-sm" style="display:none; transition: all 0.3s;" onclick="app.printLastOrder()"><i class="fas fa-print me-2"></i> طباعة الإيصال للطلب الأخير</button>
+                            </div>
                         </div>
                     </form>
                 </div>
             </div>
-
             <div id="tab-kanban" class="tab-content" style="display:none;">
                 <div class="d-flex justify-content-between align-items-center mb-4 p-3 rounded-4 shadow-sm" style="background:var(--card-bg)">
                     <div>
@@ -1223,6 +1220,10 @@
         const statusMapAr = { new: 'جديدة', process: 'تحضير', done: 'جاهزة', delivered: 'مسلمة', postponed: 'مؤجل', canceled: 'ملغي', stored: 'مخزن' };
 
         window.app = {
+            /* --- تمت إضافة إعدادات الـ Wizard هنا --- */
+            currentStep: 1,
+            totalSteps: 3,
+
             currentUser: null,
             currentUserRole: null,
             currentUserName: null,
@@ -1238,6 +1239,60 @@
             modalOrderData: null,
             lastSavedOrderId: null,
             isDarkMode: localStorage.getItem('darzaDarkMode') === 'true',
+
+            /* --- دالة التحريك الخاصة بالـ Wizard --- */
+            changeStep(direction) {
+                if (direction === 1) {
+                    const currentContainer = document.getElementById(`step-${this.currentStep}`);
+                    const inputs = currentContainer.querySelectorAll('input[required], select[required]');
+                    let isValid = true;
+                    inputs.forEach(input => {
+                        if (!input.checkValidity()) {
+                            input.reportValidity();
+                            input.style.boxShadow = "0 0 0 3px rgba(220, 53, 69, 0.25)";
+                            setTimeout(() => input.style.boxShadow = "", 2000);
+                            isValid = false;
+                        }
+                    });
+                    if (!isValid) return;
+                }
+
+                const prevStep = document.getElementById(`step-${this.currentStep}`);
+                const prevDot = document.getElementById(`dot-${this.currentStep}`);
+                
+                prevStep.style.opacity = '0';
+                prevStep.style.transform = direction === 1 ? 'translateX(-30px)' : 'translateX(30px)';
+                
+                setTimeout(() => {
+                    prevStep.classList.remove('active');
+                    prevDot.classList.remove('active');
+                    
+                    if (direction === 1) {
+                        prevDot.classList.add('completed');
+                        prevDot.innerHTML = '<i class="fas fa-check"></i>';
+                    } else {
+                        prevDot.classList.remove('completed');
+                        if(this.currentStep === 2) prevDot.innerHTML = '<i class="fas fa-box-open"></i>';
+                        if(this.currentStep === 3) prevDot.innerHTML = '<i class="fas fa-check-circle"></i>';
+                    }
+
+                    this.currentStep += direction;
+
+                    const progress = ((this.currentStep - 1) / (this.totalSteps - 1)) * 100;
+                    document.getElementById('progress-line').style.width = `${progress}%`;
+
+                    const newStep = document.getElementById(`step-${this.currentStep}`);
+                    const newDot = document.getElementById(`dot-${this.currentStep}`);
+                    
+                    newStep.classList.add('active');
+                    newDot.classList.add('active');
+                    
+                    void newStep.offsetWidth; 
+                    newStep.style.opacity = '1';
+                    newStep.style.transform = 'translateX(0)';
+
+                }, 300);
+            },
 
             init() {
                 this.bindLogin();
@@ -1256,8 +1311,11 @@
                 const mobInput = document.getElementById('custMob');
                 if(mobInput) {
                     mobInput.addEventListener('input', (e) => {
-let val = e.target.value.replace(/\D/g, '');
-e.target.value = val;
+                        let val = e.target.value.replace(/\D/g, '');
+                        if(val.length > 2) val = val.substring(0,2) + ' ' + val.substring(2);
+                        if(val.length > 6) val = val.substring(0,6) + ' ' + val.substring(6);
+                        e.target.value = val;
+
                         const rawNumber = val.replace(/\s/g, '');
                         const dupWarn = document.getElementById('duplicateWarning');
                         if(rawNumber.length >= 8) {
@@ -1284,7 +1342,6 @@ e.target.value = val;
                 this.isDarkMode = !this.isDarkMode;
                 localStorage.setItem('darzaDarkMode', this.isDarkMode);
                 this.applyDarkMode();
-                // Re-render charts for color adaptation
                 if(document.querySelector('.tab-content[style*="block"]')?.id === 'tab-dashboard') {
                     this.renderDashboard();
                 }
@@ -1339,7 +1396,6 @@ e.target.value = val;
                     phonePrefix.innerText = '+970';
                     currencyLabel.innerText = 'ILS';
                 }
-                // Trigger change to hide dup warning
                 document.getElementById('custMob').dispatchEvent(new Event('input'));
             },
 
@@ -1406,7 +1462,6 @@ e.target.value = val;
                     this.showTab('tab-reports');
                 }
 
-                // Sync mobile bottom nav visibility
                 document.querySelectorAll('.bottom-nav-link').forEach(btn => {
                     const navId = btn.getAttribute('data-nav');
                     const topNav = document.getElementById(navId);
@@ -1424,7 +1479,6 @@ e.target.value = val;
                 const activeBtn = document.querySelector(`.nav-link[onclick="app.showTab('${id}')"]`);
                 if(activeBtn) activeBtn.classList.add('active');
 
-                // Mobile Bottom Nav Sync
                 document.querySelectorAll('.bottom-nav-link').forEach(btn => btn.classList.remove('active'));
                 const activeBottomBtn = document.querySelector(`.bottom-nav-link[onclick="app.showTab('${id}')"]`);
                 if(activeBottomBtn) activeBottomBtn.classList.add('active');
@@ -1440,19 +1494,19 @@ e.target.value = val;
                 if (id === 'tab-definitions') this.renderDefinitions();
             },
 
-           notify(msg, type) {
-    if (type === 'success' && window.navigator && window.navigator.vibrate) {
-        window.navigator.vibrate(50);
-    } // تأكد من إغلاق القوس هنا
-    const colors = { success: "#28a745", error: "#dc3545", warning: "#ffc107", info: "#17a2b8" };
-    Toastify({ 
-        text: msg, 
-        duration: 3000, 
-        gravity: "bottom", 
-        position: "right", 
-        style: { background: colors[type], borderRadius: '8px' } 
-    }).showToast();
-},
+            notify(msg, type) {
+                if (type === 'success' && window.navigator && window.navigator.vibrate) {
+                    window.navigator.vibrate(50);
+                } 
+                const colors = { success: "#28a745", error: "#dc3545", warning: "#ffc107", info: "#17a2b8" };
+                Toastify({ 
+                    text: msg, 
+                    duration: 3000, 
+                    gravity: "bottom", 
+                    position: "right", 
+                    style: { background: colors[type], borderRadius: '8px' } 
+                }).showToast();
+            },
 
             logAction(actionType, orderId, details) {
                 if (this.currentUserRole !== 'Admin') return;
@@ -1599,8 +1653,27 @@ e.target.value = val;
                 
                 ['custName', 'custAddr', 'custMob', 'size', 'weight', 'height', 'price', 'tags'].forEach(id => document.getElementById(id).value = '');
                 document.getElementById('duplicateWarning').style.display = 'none';
-                document.getElementById('custName').focus();
                 
+                /* --- تصفير واجهة الـ Wizard للخطوة الأولى --- */
+                document.getElementById(`step-${this.currentStep}`).classList.remove('active');
+                document.getElementById('progress-line').style.width = '0%';
+                
+                for(let i=1; i<=3; i++) {
+                    let dot = document.getElementById(`dot-${i}`);
+                    dot.classList.remove('active', 'completed');
+                    if(i===1) dot.innerHTML = '<i class="fas fa-user"></i>';
+                    if(i===2) dot.innerHTML = '<i class="fas fa-box-open"></i>';
+                    if(i===3) dot.innerHTML = '<i class="fas fa-check-circle"></i>';
+                }
+                
+                this.currentStep = 1;
+                document.getElementById('step-1').style.opacity = '1';
+                document.getElementById('step-1').style.transform = 'translateX(0)';
+                document.getElementById('step-1').classList.add('active');
+                document.getElementById('dot-1').classList.add('active');
+                /* ------------------------------------------- */
+
+                document.getElementById('custName').focus();
                 document.getElementById('printLastOrderBtn').style.display = 'block';
             },
 
@@ -1732,45 +1805,38 @@ e.target.value = val;
 
             filterKanban() { this.renderKanban(); }, 
 
-/* --- استبدل الدالة القديمة بهذا الكود المحمي من أخطاء الـ Syntax --- */
+            getKanbanCard(o) {
+                const isChecked = this.selectedKbIds.has(o.id) ? 'checked' : '';
+                const waLink = `https://wa.me/${o.custMob.replace('+','')}?text=${encodeURIComponent('مرحباً ' + o.custName)}`;
+                
+                return `
+                <div class="order-card ${o.status}-border shadow-sm p-3" data-id="${o.id}" onclick="app.showOrderDetails('${o.id}', ${JSON.stringify(o).replace(/"/g, '&quot;')})">
+                    <div class="d-flex justify-content-between align-items-start mb-2">
+                        <input class="form-check-input" type="checkbox" onchange="app.toggleKbSelect('${o.id}')" ${isChecked} onclick="event.stopPropagation()">
+                        <div class="text-end">
+                            <span class="badge bg-light text-dark border small">${o.pageName || 'بدون صفحة'}</span>
+                        </div>
+                    </div>
+                    
+                    <div class="fw-bold fs-5 mb-1">${o.custName}</div>
+                    <div class="text-primary small mb-2"><i class="fas fa-phone-alt me-1"></i> ${o.custMob}</div>
+                    
+                    <div class="row g-1 border-top pt-2 mt-2 text-center">
+                        <div class="col-4 border-end"><small class="d-block text-muted">الموديل</small><strong>${o.model}</strong></div>
+                        <div class="col-4 border-end"><small class="d-block text-muted">النمرة</small><strong>${o.size}</strong></div>
+                        <div class="col-4"><small class="d-block text-muted">السعر</small><strong class="text-success">${o.price}</strong></div>
+                    </div>
 
-getKanbanCard(o) {
-    const isChecked = this.selectedKbIds.has(o.id) ? 'checked' : '';
-    const waLink = `https://wa.me/${o.custMob.replace('+','')}?text=${encodeURIComponent('مرحباً ' + o.custName)}`;
-    
-    return `
-    <div class="order-card ${o.status}-border shadow-sm p-3" data-id="${o.id}" onclick="app.showOrderDetails('${o.id}', ${JSON.stringify(o).replace(/"/g, '&quot;')})">
-        <div class="d-flex justify-content-between align-items-start mb-2">
-            <input class="form-check-input" type="checkbox" onchange="app.toggleKbSelect('${o.id}')" ${isChecked} onclick="event.stopPropagation()">
-            <div class="text-end">
-                <span class="badge bg-light text-dark border small">${o.pageName || 'بدون صفحة'}</span>
-            </div>
-        </div>
-        
-        <div class="fw-bold fs-5 mb-1">${o.custName}</div>
-        <div class="text-primary small mb-2"><i class="fas fa-phone-alt me-1"></i> ${o.custMob}</div>
-        
-        <div class="row g-1 border-top pt-2 mt-2 text-center">
-            <div class="col-4 border-end"><small class="d-block text-muted">الموديل</small><strong>${o.model}</strong></div>
-            <div class="col-4 border-end"><small class="d-block text-muted">النمرة</small><strong>${o.size}</strong></div>
-            <div class="col-4"><small class="d-block text-muted">السعر</small><strong class="text-success">${o.price}</strong></div>
-        </div>
+                    <div class="d-flex justify-content-between align-items-center mt-3 pt-2 border-top">
+                        <small class="text-muted"><i class="fas fa-user-edit"></i> ${o.entryUser}</small>
+                        <div class="actions">
+                            <i class="fab fa-whatsapp text-success fs-5 ms-2 pointer" onclick="event.stopPropagation(); window.open('${waLink}')"></i>
+                            <i class="fas fa-copy text-muted pointer" onclick="event.stopPropagation(); app.copyToClipboard('${o.custMob}')"></i>
+                        </div>
+                    </div>
+                </div>`;
+            },
 
-        <div class="d-flex justify-content-between align-items-center mt-3 pt-2 border-top">
-            <small class="text-muted"><i class="fas fa-user-edit"></i> ${o.entryUser}</small>
-            <div class="actions">
-                <i class="fab fa-whatsapp text-success fs-5 ms-2 pointer" onclick="event.stopPropagation(); window.open('${waLink}')"></i>
-                <i class="fas fa-copy text-muted pointer" onclick="event.stopPropagation(); app.copyToClipboard('${o.custMob}')"></i>
-            </div>
-        </div>
-    </div>`;
-}, // <--- تأكد من وجود هذه الفاصلة والقوس هنا
-
-toggleKbSelect(id) {
-    if (this.selectedKbIds.has(id)) this.selectedKbIds.delete(id);
-    else this.selectedKbIds.add(id);
-    this.updateKbBulkPanel();
-},
             toggleKbSelect(id) {
                 if (this.selectedKbIds.has(id)) this.selectedKbIds.delete(id);
                 else this.selectedKbIds.add(id);
@@ -1816,18 +1882,7 @@ toggleKbSelect(id) {
 
             executeBulkPrint(idsArray) {
                 const win = window.open('', '_blank');
-                let html = `<html><head><title>طباعة طلبات متعددة</title>
-                /* هذا الكود يعطي مساحة من الأعلى للقائمة التي تحوي الطلبات حتى لا يختفي الطلب الأول */
-.board-column, .orders-container, .list-group {
-    padding-top: 15px !important;
-    margin-top: 10px;
-}
-
-/* لضمان أن أول كرت (طلب) يملك مساحة من الأعلى */
-.order-card:first-child {
-    margin-top: 10px !important; 
-}
-<style>
+                let html = `<html><head><title>طباعة طلبات متعددة</title><style>
                     body { font-family: 'Tahoma', Arial; padding: 2rem; direction: rtl; }
                     .order-box { border: 2px solid #000; padding: 20px; margin-bottom: 30px; border-radius: 10px; page-break-inside: avoid; }
                     table { width: 100%; text-align: right; margin-top:10px; font-size: 18px; }
@@ -1935,40 +1990,23 @@ toggleKbSelect(id) {
                                 <span class="input-group-text copy-btn m-0" onclick="app.copyToClipboard('${order.custMob}')"><i class="fas fa-copy"></i></span>
                             </div>
                         </div>
-<div class="col-md-4">
-    <label class="form-label fw-bold" style="width: 100%; text-align: right;">رقم الموبايل <span class="text-danger">*</span></label>
-    <div class="input-group" dir="ltr">
-        <select id="countryCode" class="form-select fw-bold text-center" style="max-width: 100px; background:var(--bg-color)">
-            <option value="+962">+962</option>
-            <option value="+970">+970</option>
-        </select>
-        <input type="tel" 
-               id="mobile" 
-               class="form-control fw-bold fs-5 text-end" 
-               required 
-               placeholder="xxxxxxxxx" 
-               minlength="9" 
-               maxlength="9" 
-               pattern="[0-9]{9}" 
-               title="رقم الموبايل يجب أن يتكون من 9 أرقام بالضبط"
-               oninput="this.value = this.value.replace(/[^0-9]/g, '');">
-    </div>
-</div>                        
+                        <div class="col-md-12">
+                            <label class="small text-muted fw-bold">العنوان التفصيلي</label>
+                            <div class="input-group">
+                                <input class="form-control" id="modCustAddr" value="${order.custAddr}" required ${isReadOnly}>
+                                <span class="input-group-text copy-btn m-0" onclick="app.copyToClipboard('${order.country} ${order.governorate} ${order.custAddr}')"><i class="fas fa-copy"></i></span>
+                            </div>
+                        </div>
+                        
                         <div class="col-md-4">
                             <label class="small text-muted fw-bold">الموديل</label>
                             <input class="form-control" id="modModel" value="${order.model}" required ${isReadOnly}>
                         </div>
-<div class="col-md-4">
-    <label class="form-label fw-bold">النمرة <span class="text-danger">*</span></label>
-    <input type="number" 
-           id="shoeSize" 
-           class="form-control fw-bold fs-5" 
-           required 
-           placeholder="مثال: 42" 
-           min="21" 
-           max="49" 
-           title="النمرة يجب أن تكون رقماً بين 21 و 49">
-</div>                        <div class="col-md-4">
+                        <div class="col-md-4">
+                            <label class="small text-muted fw-bold">النمرة</label>
+                            <input class="form-control" id="modSize" value="${order.size}" required ${isReadOnly}>
+                        </div>
+                        <div class="col-md-4">
                             <label class="small text-muted fw-bold">السعر (${order.currency||'JOD'})</label>
                             <input type="number" step="0.5" class="form-control text-success fw-bold" id="modPrice" value="${order.price}" required ${isReadOnly}>
                         </div>
