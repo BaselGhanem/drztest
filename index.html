@@ -203,7 +203,7 @@
 .postponed-border { border-top-color: var(--status-postponed); }
 .canceled-border { border-top-color: var(--status-canceled); }
 .stored-border { border-top-color: var(--status-stored); }
-        }
+        
 
         .accordion-item {
             background-color: var(--card-bg) !important;
@@ -1422,12 +1422,19 @@
                 if (id === 'tab-definitions') this.renderDefinitions();
             },
 
-            notify(msg, type) {
-                if (type === 'success' && window.navigator && window.navigator.vibrate) {
+           notify(msg, type) {
+    if (type === 'success' && window.navigator && window.navigator.vibrate) {
         window.navigator.vibrate(50);
-                const colors = { success: "#28a745", error: "#dc3545", warning: "#ffc107", info: "#17a2b8" };
-                Toastify({ text: msg, duration: 3000, gravity: "bottom", position: "right", style: { background: colors[type], borderRadius: '8px' } }).showToast();
-            },
+    } // تأكد من إغلاق القوس هنا
+    const colors = { success: "#28a745", error: "#dc3545", warning: "#ffc107", info: "#17a2b8" };
+    Toastify({ 
+        text: msg, 
+        duration: 3000, 
+        gravity: "bottom", 
+        position: "right", 
+        style: { background: colors[type], borderRadius: '8px' } 
+    }).showToast();
+},
 
             logAction(actionType, orderId, details) {
                 if (this.currentUserRole !== 'Admin') return;
